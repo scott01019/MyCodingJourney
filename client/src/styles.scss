@@ -1,0 +1,51 @@
+$theme-colors: (
+    "color-primary": #08b470,
+    "neutral-color": #f8f8f8
+);
+
+@import "./../node_modules/bootstrap/scss/functions";
+@import "./../node_modules/bootstrap/scss/variables";
+@import "./../node_modules/bootstrap/scss/mixins";
+
+$link-color:                theme-color("color-primary") !default;
+$link-decoration:           none !default;
+$link-hover-color:          darken($link-color, 15%) !default;
+$link-hover-decoration:     underline !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 740px,
+  xl: 1000px
+);
+
+$input-focus-border-color:              $input-border-color;
+$input-focus-color:                     none;
+$input-focus-width:                     none;
+$input-focus-box-shadow:                none;
+
+$btn-focus-width:                       none;
+$btn-focus-box-shadow:                  none;
+$btn-active-box-shadow:                 none;
+
+.btn.btn-short {
+  @include button-size(0, $btn-padding-x, $font-size-base, $btn-line-height, $border-radius);
+}
+
+.btn.btn-short-sm {
+  @include button-size(0, $btn-padding-x, $font-size-base * 0.75, $btn-line-height, $border-radius);
+}
+
+.btn.btn-xs {
+  @include button-size(0, $btn-padding-x, $font-size-base * 0.6, $btn-line-height, $border-radius);
+}
+
+@import "./../node_modules/bootstrap/scss/bootstrap";
+
+ul.navbar-nav > li.nav-item > a.nav-link {
+  color: theme-color("color-primary");
+}
+
+html {
+    padding: 3em;
+}
