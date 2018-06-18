@@ -32,6 +32,8 @@ module.exports = new Promise((res, rej) => {
                     await users[j].save()
                 } 
             }
+            articles[i].numLikes = articles[i].likedBy.length
+            await articles[i].save()
         }
 
         res("Finished creating article likes.")

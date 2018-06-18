@@ -8,8 +8,12 @@
         </a>
         <ul class="list-inline">
             <li class="list-inline-item">
-                <button class="btn btn-short btn-light">{{ article.likedBy.length }} Likes</button>
+                <button class="btn btn-short btn-light">{{ article.numLikes }} Likes</button>
             </li>
+            <li class="list-inline-item">
+                <button class="btn btn-short btn-light">{{ article.numComments }} Comments</button>
+            </li>
+
         </ul>
         <div class="media">
             <img class="rounded-circle mr-3 author-img" src="./../../../assets/scott_burnette_pic.jpg" alt="Generic placeholder image">

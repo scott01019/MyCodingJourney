@@ -2444,7 +2444,7 @@ function createEntityAdapter(options) {
 /*!*********************************************!*\
   !*** ./src/app/articles/actions/article.ts ***!
   \*********************************************/
-/*! exports provided: ArticleActionTypes, Load, LoadSuccess, LoadError, LoadLatest, LoadLatestSuccess, LoadLatestError */
+/*! exports provided: ArticleActionTypes, Load, LoadSuccess, LoadError, LoadAll, LoadAllSuccess, LoadAllError, SortBy */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2453,17 +2453,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Load", function() { return Load; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSuccess", function() { return LoadSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadError", function() { return LoadError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadLatest", function() { return LoadLatest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadLatestSuccess", function() { return LoadLatestSuccess; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadLatestError", function() { return LoadLatestError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadAll", function() { return LoadAll; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadAllSuccess", function() { return LoadAllSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadAllError", function() { return LoadAllError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortBy", function() { return SortBy; });
 var ArticleActionTypes;
 (function (ArticleActionTypes) {
     ArticleActionTypes["Load"] = "[Article] Load";
     ArticleActionTypes["LoadSuccess"] = "[Article] Load Success";
     ArticleActionTypes["LoadError"] = "[Article] Load Error";
-    ArticleActionTypes["LoadLatest"] = "[Article] Load Latest";
-    ArticleActionTypes["LoadLatestSuccess"] = "[Article] Load Latest Success";
-    ArticleActionTypes["LoadLatestError"] = "[Article] Load Latest Error";
+    ArticleActionTypes["LoadAll"] = "[Article] Load Many";
+    ArticleActionTypes["LoadAllSuccess"] = "[Article] Load Many Success";
+    ArticleActionTypes["LoadAllError"] = "[Article] Load Many Error";
+    ArticleActionTypes["SortBy"] = "[Article] Sort By";
 })(ArticleActionTypes || (ArticleActionTypes = {}));
 var Load = /** @class */ (function () {
     function Load(payload) {
@@ -2489,28 +2491,70 @@ var LoadError = /** @class */ (function () {
     return LoadError;
 }());
 
-var LoadLatest = /** @class */ (function () {
-    function LoadLatest(payload) {
-        this.payload = payload;
-        this.type = ArticleActionTypes.LoadLatest;
+var LoadAll = /** @class */ (function () {
+    function LoadAll() {
+        this.type = ArticleActionTypes.LoadAll;
     }
-    return LoadLatest;
+    return LoadAll;
 }());
 
-var LoadLatestSuccess = /** @class */ (function () {
-    function LoadLatestSuccess(payload) {
+var LoadAllSuccess = /** @class */ (function () {
+    function LoadAllSuccess(payload) {
         this.payload = payload;
-        this.type = ArticleActionTypes.LoadLatestSuccess;
+        this.type = ArticleActionTypes.LoadAllSuccess;
     }
-    return LoadLatestSuccess;
+    return LoadAllSuccess;
 }());
 
-var LoadLatestError = /** @class */ (function () {
-    function LoadLatestError(payload) {
+var LoadAllError = /** @class */ (function () {
+    function LoadAllError(payload) {
         this.payload = payload;
-        this.type = ArticleActionTypes.LoadLatestError;
+        this.type = ArticleActionTypes.LoadAllError;
     }
-    return LoadLatestError;
+    return LoadAllError;
+}());
+
+var SortBy = /** @class */ (function () {
+    function SortBy(payload) {
+        this.payload = payload;
+        this.type = ArticleActionTypes.SortBy;
+    }
+    return SortBy;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/articles/actions/layout.ts":
+/*!********************************************!*\
+  !*** ./src/app/articles/actions/layout.ts ***!
+  \********************************************/
+/*! exports provided: LayoutActionTypes, GridView, ListView */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LayoutActionTypes", function() { return LayoutActionTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GridView", function() { return GridView; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListView", function() { return ListView; });
+var LayoutActionTypes;
+(function (LayoutActionTypes) {
+    LayoutActionTypes["GridView"] = "[Layout] Grid View";
+    LayoutActionTypes["ListView"] = "[Layout] List View";
+})(LayoutActionTypes || (LayoutActionTypes = {}));
+var GridView = /** @class */ (function () {
+    function GridView() {
+        this.type = LayoutActionTypes.GridView;
+    }
+    return GridView;
+}());
+
+var ListView = /** @class */ (function () {
+    function ListView() {
+        this.type = LayoutActionTypes.ListView;
+    }
+    return ListView;
 }());
 
 
@@ -2531,22 +2575,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
-/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
-/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm5/angular-fontawesome.js");
-/* harmony import */ var _effects_article__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./effects/article */ "./src/app/articles/effects/article.ts");
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./reducers */ "./src/app/articles/reducers/index.ts");
-/* harmony import */ var _containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./containers/articles-home-page/articles-home-page.component */ "./src/app/articles/containers/articles-home-page/articles-home-page.component.ts");
-/* harmony import */ var _components_articles_home_grid_articles_home_grid_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/articles-home-grid/articles-home-grid.component */ "./src/app/articles/components/articles-home-grid/articles-home-grid.component.ts");
+/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm5/angular-fontawesome.js");
+/* harmony import */ var _effects_article__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./effects/article */ "./src/app/articles/effects/article.ts");
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./reducers */ "./src/app/articles/reducers/index.ts");
+/* harmony import */ var _containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./containers/articles-home-page/articles-home-page.component */ "./src/app/articles/containers/articles-home-page/articles-home-page.component.ts");
 /* harmony import */ var _components_articles_home_sub_menu_articles_home_sub_menu_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/articles-home-sub-menu/articles-home-sub-menu.component */ "./src/app/articles/components/articles-home-sub-menu/articles-home-sub-menu.component.ts");
 /* harmony import */ var _components_article_card_article_card_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/article-card/article-card.component */ "./src/app/articles/components/article-card/article-card.component.ts");
 /* harmony import */ var _services_article_http_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./services/article-http.service */ "./src/app/articles/services/article-http.service.ts");
+/* harmony import */ var _components_articles_listing_articles_listing_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/articles-listing/articles-listing.component */ "./src/app/articles/components/articles-listing/articles-listing.component.ts");
+/* harmony import */ var _components_articles_load_button_articles_load_button_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/articles-load-button/articles-load-button.component */ "./src/app/articles/components/articles-load-button/articles-load-button.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -2569,15 +2617,16 @@ var ArticlesModule = /** @class */ (function () {
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild([
-                    { path: "", component: _containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_9__["ArticlesHomePageComponent"] }
+                    { path: "", component: _containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_10__["ArticlesHomePageComponent"] }
                 ]),
-                _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeModule"],
-                _ngrx_store__WEBPACK_IMPORTED_MODULE_4__["StoreModule"].forFeature("articles", _reducers__WEBPACK_IMPORTED_MODULE_8__["reducers"]),
-                _ngrx_effects__WEBPACK_IMPORTED_MODULE_5__["EffectsModule"].forFeature([_effects_article__WEBPACK_IMPORTED_MODULE_7__["ArticleEffects"]])
+                _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeModule"],
+                _ngrx_store__WEBPACK_IMPORTED_MODULE_5__["StoreModule"].forFeature("articles", _reducers__WEBPACK_IMPORTED_MODULE_9__["reducers"]),
+                _ngrx_effects__WEBPACK_IMPORTED_MODULE_6__["EffectsModule"].forFeature([_effects_article__WEBPACK_IMPORTED_MODULE_8__["ArticleEffects"]])
             ],
             providers: [_services_article_http_service__WEBPACK_IMPORTED_MODULE_13__["ArticleHttpService"]],
-            declarations: [_containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_9__["ArticlesHomePageComponent"], _components_articles_home_grid_articles_home_grid_component__WEBPACK_IMPORTED_MODULE_10__["ArticlesHomeGridComponent"], _components_articles_home_sub_menu_articles_home_sub_menu_component__WEBPACK_IMPORTED_MODULE_11__["ArticlesHomeSubMenuComponent"], _components_article_card_article_card_component__WEBPACK_IMPORTED_MODULE_12__["ArticleCardComponent"]]
+            declarations: [_containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_10__["ArticlesHomePageComponent"], _components_articles_home_sub_menu_articles_home_sub_menu_component__WEBPACK_IMPORTED_MODULE_11__["ArticlesHomeSubMenuComponent"], _components_article_card_article_card_component__WEBPACK_IMPORTED_MODULE_12__["ArticleCardComponent"], _components_articles_listing_articles_listing_component__WEBPACK_IMPORTED_MODULE_14__["ArticlesListingComponent"], _components_articles_load_button_articles_load_button_component__WEBPACK_IMPORTED_MODULE_15__["ArticlesLoadButtonComponent"]]
         })
     ], ArticlesModule);
     return ArticlesModule;
@@ -2594,7 +2643,7 @@ var ArticlesModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card rounded-0\">\n    <a>\n        <img class=\"card-img-top\" src=\"{{ article.img }}\">\n    </a>\n    <div class=\"card-body\">\n        <a>\n            <h5 class=\"card-title\">{{ article.title }}</h5>\n        </a>\n        <ul class=\"list-inline\">\n            <li class=\"list-inline-item\">\n                <button class=\"btn btn-short btn-light\">{{ article.likedBy.length }} Likes</button>\n            </li>\n        </ul>\n        <div class=\"media\">\n            <img class=\"rounded-circle mr-3 author-img\" src=\"./../../../assets/scott_burnette_pic.jpg\" alt=\"Generic placeholder image\">\n            <div class=\"media-body\">\n                <a href=\"#\" class=\"small text-dark\">Scott Burnette</a>\n                <p class=\"card-text\">\n                    <small class=\"text-muted\">{{ article.createdAt | date }}</small>\n                </p>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"card rounded-0\">\n    <a>\n        <img class=\"card-img-top\" src=\"{{ article.img }}\">\n    </a>\n    <div class=\"card-body\">\n        <a>\n            <h5 class=\"card-title\">{{ article.title }}</h5>\n        </a>\n        <ul class=\"list-inline\">\n            <li class=\"list-inline-item\">\n                <button class=\"btn btn-short btn-light\">{{ article.numLikes }} Likes</button>\n            </li>\n            <li class=\"list-inline-item\">\n                <button class=\"btn btn-short btn-light\">{{ article.numComments }} Comments</button>\n            </li>\n\n        </ul>\n        <div class=\"media\">\n            <img class=\"rounded-circle mr-3 author-img\" src=\"./../../../assets/scott_burnette_pic.jpg\" alt=\"Generic placeholder image\">\n            <div class=\"media-body\">\n                <a href=\"#\" class=\"small text-dark\">Scott Burnette</a>\n                <p class=\"card-text\">\n                    <small class=\"text-muted\">{{ article.createdAt | date }}</small>\n                </p>\n            </div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -2654,73 +2703,6 @@ var ArticleCardComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/articles/components/articles-home-grid/articles-home-grid.component.html":
-/*!******************************************************************************************!*\
-  !*** ./src/app/articles/components/articles-home-grid/articles-home-grid.component.html ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <ng-container *ngFor=\"let article of articles\">\n            <div class=\"col-4 mb-3\">\n                <article-card [article]=\"article\"></article-card>\n            </div>\n        </ng-container>\n    </div>\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/articles/components/articles-home-grid/articles-home-grid.component.scss":
-/*!******************************************************************************************!*\
-  !*** ./src/app/articles/components/articles-home-grid/articles-home-grid.component.scss ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/articles/components/articles-home-grid/articles-home-grid.component.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/app/articles/components/articles-home-grid/articles-home-grid.component.ts ***!
-  \****************************************************************************************/
-/*! exports provided: ArticlesHomeGridComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticlesHomeGridComponent", function() { return ArticlesHomeGridComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ArticlesHomeGridComponent = /** @class */ (function () {
-    function ArticlesHomeGridComponent() {
-    }
-    ArticlesHomeGridComponent.prototype.ngOnInit = function () {
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Array)
-    ], ArticlesHomeGridComponent.prototype, "articles", void 0);
-    ArticlesHomeGridComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'articles-home-grid',
-            template: __webpack_require__(/*! ./articles-home-grid.component.html */ "./src/app/articles/components/articles-home-grid/articles-home-grid.component.html"),
-            styles: [__webpack_require__(/*! ./articles-home-grid.component.scss */ "./src/app/articles/components/articles-home-grid/articles-home-grid.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], ArticlesHomeGridComponent);
-    return ArticlesHomeGridComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/articles/components/articles-home-sub-menu/articles-home-sub-menu.component.html":
 /*!**************************************************************************************************!*\
   !*** ./src/app/articles/components/articles-home-sub-menu/articles-home-sub-menu.component.html ***!
@@ -2728,7 +2710,7 @@ var ArticlesHomeGridComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mt-5\">\n    <div class=\"row\">\n        <ul class=\"nav col\">\n            <li class=\"nav-item\">\n                <a href=\"#\" class=\"text-secondary\">\n                    <fa-icon [icon]=\"faFilter\" size=\"lg\"></fa-icon>\n                </a>\n            </li>\n        </ul>\n        <ul class=\"nav col justify-content-end\">\n            <li class=\"nav-item mx-1\">\n                <a href=\"#\" class=\"text-secondary\">\n                    <fa-icon [icon]=\"faTh\" size=\"lg\"></fa-icon>\n                </a>\n            </li>\n            <li class=\"nav-item mx-1\">\n                <a href=\"#\" class=\"text-secondary\">\n                    <fa-icon [icon]=\"faList\" size=\"lg\"></fa-icon>\n                </a>\n            </li>\n        </ul>\n    </div>\n</div>\n<hr class=\"mt-0\">"
+module.exports = "<div class=\"container mt-5\">\n    <div class=\"row\">\n        <ul class=\"nav col\">\n            <li class=\"nav-item\">\n                <a href=\"#\" class=\"text-secondary\">\n                    <fa-icon [icon]=\"faFilter\" size=\"lg\"></fa-icon>\n                </a>\n            </li>\n        </ul>\n        <ul class=\"nav col justify-content-end\">\n            <li class=\"nav-item mx-1\">\n                <div ngbDropdown class=\"d-inline-block\">\n                    <button class=\"btn btn-outline-primary\" id=\"dropdownBasic1\" ngbDropdownToggle>{{ sortedBy }}</button>\n                    <div ngbDropdownMenu aria-labelledby=\"dropdownBasic1\">\n                        <button class=\"dropdown-item\" (click)=\"sortByNewest.emit()\">Latest</button>\n                        <button class=\"dropdown-item\" (click)=\"sortByPopular.emit()\">Popular</button>\n                        <button class=\"dropdown-item\" (click)=\"sortByOldest.emit()\">Oldest</button>\n                    </div>\n                </div>\n            </li>\n            <li class=\"nav-item mx-1\">\n                <a href=\"#\" (click)=\"gridClicked.emit()\" class=\"text-secondary\">\n                    <fa-icon [icon]=\"faTh\" size=\"lg\"></fa-icon>\n                </a>\n            </li>\n            <li class=\"nav-item mx-1\">\n                <a href=\"#\" (click)=\"listClicked.emit()\" class=\"text-secondary\">\n                    <fa-icon [icon]=\"faList\" size=\"lg\"></fa-icon>\n                </a>\n            </li>\n        </ul>\n    </div>\n</div>\n<hr class=\"mt-0\">"
 
 /***/ }),
 
@@ -2755,6 +2737,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticlesHomeSubMenuComponent", function() { return ArticlesHomeSubMenuComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _models_article__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/article */ "./src/app/articles/models/article.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2766,17 +2749,37 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var ArticlesHomeSubMenuComponent = /** @class */ (function () {
     function ArticlesHomeSubMenuComponent() {
         this.faFilter = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faFilter"];
         this.faList = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faList"];
         this.faTh = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faTh"];
+        this.sortByNewest = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.sortByOldest = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.sortByPopular = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.filterClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.listClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.gridClicked = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     ArticlesHomeSubMenuComponent.prototype.ngOnInit = function () {
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", String)
+    ], ArticlesHomeSubMenuComponent.prototype, "sortedBy", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], ArticlesHomeSubMenuComponent.prototype, "sortByNewest", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], ArticlesHomeSubMenuComponent.prototype, "sortByOldest", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], ArticlesHomeSubMenuComponent.prototype, "sortByPopular", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", Object)
@@ -2804,6 +2807,146 @@ var ArticlesHomeSubMenuComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/articles/components/articles-listing/articles-listing.component.html":
+/*!**************************************************************************************!*\
+  !*** ./src/app/articles/components/articles-listing/articles-listing.component.html ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <ng-container *ngFor=\"let article of articles\">\n            <div [ngClass]=\"{'col-4': isGridView }\" class=\"mb-3\">\n                <article-card [article]=\"article\"></article-card>\n            </div>\n        </ng-container>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/articles/components/articles-listing/articles-listing.component.scss":
+/*!**************************************************************************************!*\
+  !*** ./src/app/articles/components/articles-listing/articles-listing.component.scss ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/articles/components/articles-listing/articles-listing.component.ts":
+/*!************************************************************************************!*\
+  !*** ./src/app/articles/components/articles-listing/articles-listing.component.ts ***!
+  \************************************************************************************/
+/*! exports provided: ArticlesListingComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticlesListingComponent", function() { return ArticlesListingComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ArticlesListingComponent = /** @class */ (function () {
+    function ArticlesListingComponent() {
+        this.isGridView = true;
+        this.isListView = false;
+    }
+    ArticlesListingComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], ArticlesListingComponent.prototype, "articles", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], ArticlesListingComponent.prototype, "isGridView", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Boolean)
+    ], ArticlesListingComponent.prototype, "isListView", void 0);
+    ArticlesListingComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'articles-listing',
+            template: __webpack_require__(/*! ./articles-listing.component.html */ "./src/app/articles/components/articles-listing/articles-listing.component.html"),
+            styles: [__webpack_require__(/*! ./articles-listing.component.scss */ "./src/app/articles/components/articles-listing/articles-listing.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ArticlesListingComponent);
+    return ArticlesListingComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/articles/components/articles-load-button/articles-load-button.component.html":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/articles/components/articles-load-button/articles-load-button.component.html ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row mx-auto\">\n    <div class=\"col\">\n        <button class=\"btn btn-block btn-outline-color-primary\">Load More...</button>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/articles/components/articles-load-button/articles-load-button.component.scss":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/articles/components/articles-load-button/articles-load-button.component.scss ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/articles/components/articles-load-button/articles-load-button.component.ts":
+/*!********************************************************************************************!*\
+  !*** ./src/app/articles/components/articles-load-button/articles-load-button.component.ts ***!
+  \********************************************************************************************/
+/*! exports provided: ArticlesLoadButtonComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticlesLoadButtonComponent", function() { return ArticlesLoadButtonComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ArticlesLoadButtonComponent = /** @class */ (function () {
+    function ArticlesLoadButtonComponent() {
+    }
+    ArticlesLoadButtonComponent.prototype.ngOnInit = function () {
+    };
+    ArticlesLoadButtonComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'articles-load-button',
+            template: __webpack_require__(/*! ./articles-load-button.component.html */ "./src/app/articles/components/articles-load-button/articles-load-button.component.html"),
+            styles: [__webpack_require__(/*! ./articles-load-button.component.scss */ "./src/app/articles/components/articles-load-button/articles-load-button.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ArticlesLoadButtonComponent);
+    return ArticlesLoadButtonComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/articles/containers/articles-home-page/articles-home-page.component.html":
 /*!******************************************************************************************!*\
   !*** ./src/app/articles/containers/articles-home-page/articles-home-page.component.html ***!
@@ -2811,7 +2954,7 @@ var ArticlesHomeSubMenuComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<articles-home-sub-menu></articles-home-sub-menu>\n<articles-home-grid [articles]=\"articles | async\"></articles-home-grid>"
+module.exports = "<articles-home-sub-menu (gridClicked)=\"loadGridView()\" (listClicked)=\"loadListView()\"\n(sortByNewest)=\"sortByNewest()\" (sortByOldest)=\"sortByOldest()\" (sortByPopular)=\"sortByPopular()\" [sortedBy]=\"sort\"></articles-home-sub-menu>\n<articles-listing [articles]=\"articles | async\" [isGridView]=\"isGridView | async\" [isListView]=\"isListView | async\"></articles-listing>"
 
 /***/ }),
 
@@ -2838,8 +2981,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticlesHomePageComponent", function() { return ArticlesHomePageComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../reducers */ "./src/app/articles/reducers/index.ts");
+/* harmony import */ var _reducers___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../reducers/ */ "./src/app/articles/reducers/index.ts");
 /* harmony import */ var _actions_article__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../actions/article */ "./src/app/articles/actions/article.ts");
+/* harmony import */ var _models_article__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/article */ "./src/app/articles/models/article.ts");
+/* harmony import */ var _actions_layout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/layout */ "./src/app/articles/actions/layout.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2853,13 +2998,39 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var ArticlesHomePageComponent = /** @class */ (function () {
     function ArticlesHomePageComponent(store) {
+        var _this = this;
         this.store = store;
-        this.articles = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers__WEBPACK_IMPORTED_MODULE_2__["getAllArticles"]));
+        this.loading = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getLoading"]));
+        this.isListView = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getIsListView"]));
+        this.isGridView = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getIsGridView"]));
+        this.error = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getError"]));
+        this.sortSubscription = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getSort"])).subscribe(function (sort) { _this.sort = sort; });
+        this.articles = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getSortedArticles"]));
     }
     ArticlesHomePageComponent.prototype.ngOnInit = function () {
-        this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["LoadLatest"](9));
+        this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["LoadAll"]());
+    };
+    ArticlesHomePageComponent.prototype.loadGridView = function () {
+        this.store.dispatch(new _actions_layout__WEBPACK_IMPORTED_MODULE_5__["GridView"]());
+    };
+    ArticlesHomePageComponent.prototype.loadListView = function () {
+        this.store.dispatch(new _actions_layout__WEBPACK_IMPORTED_MODULE_5__["ListView"]());
+    };
+    ArticlesHomePageComponent.prototype.sortByNewest = function () {
+        this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["SortBy"](_models_article__WEBPACK_IMPORTED_MODULE_4__["ARTICLE_SORTS"].LATEST));
+    };
+    ArticlesHomePageComponent.prototype.sortByOldest = function () {
+        this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["SortBy"](_models_article__WEBPACK_IMPORTED_MODULE_4__["ARTICLE_SORTS"].OLDEST));
+    };
+    ArticlesHomePageComponent.prototype.sortByPopular = function () {
+        this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["SortBy"](_models_article__WEBPACK_IMPORTED_MODULE_4__["ARTICLE_SORTS"].POPULAR));
+    };
+    ArticlesHomePageComponent.prototype.ngOnDestroy = function () {
+        this.sortSubscription.unsubscribe();
     };
     ArticlesHomePageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2913,7 +3084,7 @@ var ArticleEffects = /** @class */ (function () {
         this.actions$ = actions$;
         this.articleService = articleService;
         this.load$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_0__["ofType"])(_actions_article__WEBPACK_IMPORTED_MODULE_4__["ArticleActionTypes"].Load), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (action) { return action.payload; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function (id) { return _this.articleService.getArticle(id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (article) { return new _actions_article__WEBPACK_IMPORTED_MODULE_4__["LoadSuccess"](article); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(new _actions_article__WEBPACK_IMPORTED_MODULE_4__["LoadError"](err)); })); }));
-        this.loadLatest$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_0__["ofType"])(_actions_article__WEBPACK_IMPORTED_MODULE_4__["ArticleActionTypes"].LoadLatest), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (action) { return action.payload; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function (size) { return _this.articleService.getLatestArticles(size).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (articles) { return new _actions_article__WEBPACK_IMPORTED_MODULE_4__["LoadLatestSuccess"](articles); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(new _actions_article__WEBPACK_IMPORTED_MODULE_4__["LoadLatestError"](err)); })); }));
+        this.loadAll$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_0__["ofType"])(_actions_article__WEBPACK_IMPORTED_MODULE_4__["ArticleActionTypes"].LoadAll), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["switchMap"])(function () { return _this.articleService.getArticles().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (articles) { return new _actions_article__WEBPACK_IMPORTED_MODULE_4__["LoadAllSuccess"](articles); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(new _actions_article__WEBPACK_IMPORTED_MODULE_4__["LoadAllError"](err)); })); }));
     }
     __decorate([
         Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_0__["Effect"])(),
@@ -2922,7 +3093,7 @@ var ArticleEffects = /** @class */ (function () {
     __decorate([
         Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_0__["Effect"])(),
         __metadata("design:type", rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"])
-    ], ArticleEffects.prototype, "loadLatest$", void 0);
+    ], ArticleEffects.prototype, "loadAll$", void 0);
     ArticleEffects = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Injectable"])(),
         __metadata("design:paramtypes", [_ngrx_effects__WEBPACK_IMPORTED_MODULE_0__["Actions"], _services_article_http_service__WEBPACK_IMPORTED_MODULE_3__["ArticleHttpService"]])
@@ -2934,11 +3105,55 @@ var ArticleEffects = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/articles/models/article.ts":
+/*!********************************************!*\
+  !*** ./src/app/articles/models/article.ts ***!
+  \********************************************/
+/*! exports provided: ARTICLE_SORTS, oldestCmp, latestCmp, popularCmp */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ARTICLE_SORTS", function() { return ARTICLE_SORTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oldestCmp", function() { return oldestCmp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "latestCmp", function() { return latestCmp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "popularCmp", function() { return popularCmp; });
+var ARTICLE_SORTS;
+(function (ARTICLE_SORTS) {
+    ARTICLE_SORTS["LATEST"] = "Latest";
+    ARTICLE_SORTS["OLDEST"] = "Oldest";
+    ARTICLE_SORTS["POPULAR"] = "Popular";
+})(ARTICLE_SORTS || (ARTICLE_SORTS = {}));
+var oldestCmp = function (a, b) {
+    if (a.createdAt < b.createdAt)
+        return -1;
+    else if (a.createdAt > b.createdAt)
+        return 1;
+    return 0;
+};
+var latestCmp = function (a, b) {
+    if (a.createdAt < b.createdAt)
+        return 1;
+    else if (a.createdAt > b.createdAt)
+        return -1;
+    return 0;
+};
+var popularCmp = function (a, b) {
+    if (a.numLikes < b.numLikes)
+        return 1;
+    else if (a.numLikes > b.numLikes)
+        return -1;
+    return 0;
+};
+
+
+/***/ }),
+
 /***/ "./src/app/articles/reducers/article.ts":
 /*!**********************************************!*\
   !*** ./src/app/articles/reducers/article.ts ***!
   \**********************************************/
-/*! exports provided: adapter, initialState, reducer, getCurrentArticleId */
+/*! exports provided: adapter, initialState, reducer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2946,9 +3161,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "adapter", function() { return adapter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentArticleId", function() { return getCurrentArticleId; });
 /* harmony import */ var _ngrx_entity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/entity */ "./node_modules/@ngrx/entity/fesm5/entity.js");
-/* harmony import */ var _actions_article__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../actions/article */ "./src/app/articles/actions/article.ts");
+/* harmony import */ var _models_article__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../models/article */ "./src/app/articles/models/article.ts");
+/* harmony import */ var _actions_article__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../actions/article */ "./src/app/articles/actions/article.ts");
 var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -2959,6 +3174,7 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
 };
 
 
+
 var adapter = Object(_ngrx_entity__WEBPACK_IMPORTED_MODULE_0__["createEntityAdapter"])({
     selectId: function (article) { return article._id; },
     sortComparer: false
@@ -2966,33 +3182,36 @@ var adapter = Object(_ngrx_entity__WEBPACK_IMPORTED_MODULE_0__["createEntityAdap
 var initialState = adapter.getInitialState({
     currentArticleId: null,
     error: null,
-    loading: false
+    loading: false,
+    sortBy: _models_article__WEBPACK_IMPORTED_MODULE_1__["ARTICLE_SORTS"].LATEST
 });
 function reducer(state, action) {
     if (state === void 0) { state = initialState; }
     switch (action.type) {
-        case _actions_article__WEBPACK_IMPORTED_MODULE_1__["ArticleActionTypes"].Load: {
-            return __assign({}, state, { currentArticleId: state.currentArticleId, error: null, loading: true });
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].Load: {
+            return __assign({}, state, { loading: true });
         }
-        case _actions_article__WEBPACK_IMPORTED_MODULE_1__["ArticleActionTypes"].LoadSuccess: {
-            return adapter.addOne(action.payload, __assign({}, state, { currentArticleId: action.payload._id, error: null, loading: false }));
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadSuccess: {
+            return adapter.addOne(action.payload, __assign({}, state, { currentArticleId: action.payload._id, loading: false }));
         }
-        case _actions_article__WEBPACK_IMPORTED_MODULE_1__["ArticleActionTypes"].LoadError: {
-            return __assign({}, state, { currentArticleId: state.currentArticleId, error: action.payload, loading: false });
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadError: {
+            return __assign({}, state, { error: action.payload, loading: false });
         }
-        case _actions_article__WEBPACK_IMPORTED_MODULE_1__["ArticleActionTypes"].LoadLatest: {
-            return __assign({}, state, { currentArticleId: state.currentArticleId, error: null, loading: true });
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadAll: {
+            return __assign({}, state, { loading: true });
         }
-        case _actions_article__WEBPACK_IMPORTED_MODULE_1__["ArticleActionTypes"].LoadLatestSuccess: {
-            return adapter.addMany(action.payload, __assign({}, state, { currentArticleId: state.currentArticleId, error: null, loading: false }));
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadAllSuccess: {
+            return adapter.addMany(action.payload, __assign({}, state, { loading: false }));
         }
-        case _actions_article__WEBPACK_IMPORTED_MODULE_1__["ArticleActionTypes"].LoadLatestError: {
-            return __assign({}, state, { currentArticleId: state.currentArticleId, error: action.payload, loading: false });
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadAllError: {
+            return __assign({}, state, { error: action.payload, loading: false });
+        }
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].SortBy: {
+            return __assign({}, state, { sortBy: action.payload });
         }
         default: return state;
     }
 }
-var getCurrentArticleId = function (state) { return state.currentArticleId; };
 
 
 /***/ }),
@@ -3001,31 +3220,98 @@ var getCurrentArticleId = function (state) { return state.currentArticleId; };
 /*!********************************************!*\
   !*** ./src/app/articles/reducers/index.ts ***!
   \********************************************/
-/*! exports provided: reducers, getArticlesState, getArticleEntitiesState, getCurrentArticleId, getArticlesIds, getArticleEntities, getAllArticles, getTotalArticles */
+/*! exports provided: reducers, articlesFeatureSelector, getArticleEntitiesState, getCurrentArticleId, getError, getLoading, getSort, getArticlesIds, getArticleEntities, getAllArticles, getTotalArticles, getSortedArticles, getLayoutState, getIsGridView, getIsListView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducers", function() { return reducers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getArticlesState", function() { return getArticlesState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "articlesFeatureSelector", function() { return articlesFeatureSelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getArticleEntitiesState", function() { return getArticleEntitiesState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentArticleId", function() { return getCurrentArticleId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return getError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLoading", function() { return getLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSort", function() { return getSort; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getArticlesIds", function() { return getArticlesIds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getArticleEntities", function() { return getArticleEntities; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllArticles", function() { return getAllArticles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTotalArticles", function() { return getTotalArticles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSortedArticles", function() { return getSortedArticles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLayoutState", function() { return getLayoutState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIsGridView", function() { return getIsGridView; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIsListView", function() { return getIsListView; });
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 /* harmony import */ var _article__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./article */ "./src/app/articles/reducers/article.ts");
+/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layout */ "./src/app/articles/reducers/layout.ts");
+/* harmony import */ var _models_article__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/article */ "./src/app/articles/models/article.ts");
+
+
 
 
 var reducers = {
-    articles: _article__WEBPACK_IMPORTED_MODULE_1__["reducer"]
+    articles: _article__WEBPACK_IMPORTED_MODULE_1__["reducer"],
+    layout: _layout__WEBPACK_IMPORTED_MODULE_2__["reducer"]
 };
-var getArticlesState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])("articles");
-var getArticleEntitiesState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticlesState, function (state) { return state.articles; });
-var getCurrentArticleId = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, _article__WEBPACK_IMPORTED_MODULE_1__["getCurrentArticleId"]);
+// articles selectors
+var articlesFeatureSelector = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])("articles");
+var getArticleEntitiesState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(articlesFeatureSelector, function (state) { return state.articles; });
+var getCurrentArticleId = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.currentArticleId; });
+var getError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.error; });
+var getLoading = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.loading; });
+var getSort = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.sortBy; });
 var getArticlesIds = (_a = _article__WEBPACK_IMPORTED_MODULE_1__["adapter"].getSelectors(getArticleEntitiesState), _a.selectIds), getArticleEntities = _a.selectEntities, getAllArticles = _a.selectAll, getTotalArticles = _a.selectTotal;
+var getSortedArticles = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getAllArticles, getSort, function (articles, sort) {
+    if (sort == _models_article__WEBPACK_IMPORTED_MODULE_3__["ARTICLE_SORTS"].LATEST)
+        return articles.sort(_models_article__WEBPACK_IMPORTED_MODULE_3__["latestCmp"]);
+    if (sort == _models_article__WEBPACK_IMPORTED_MODULE_3__["ARTICLE_SORTS"].OLDEST)
+        return articles.sort(_models_article__WEBPACK_IMPORTED_MODULE_3__["oldestCmp"]);
+    if (sort == _models_article__WEBPACK_IMPORTED_MODULE_3__["ARTICLE_SORTS"].POPULAR)
+        return articles.sort(_models_article__WEBPACK_IMPORTED_MODULE_3__["popularCmp"]);
+    return articles;
+});
+// layout selectors
+var getLayoutState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(articlesFeatureSelector, function (state) { return state.layout; });
+var getIsGridView = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getLayoutState, function (state) { return state.isGridView; });
+var getIsListView = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getLayoutState, function (state) { return state.isListView; });
 var _a;
+
+
+/***/ }),
+
+/***/ "./src/app/articles/reducers/layout.ts":
+/*!*********************************************!*\
+  !*** ./src/app/articles/reducers/layout.ts ***!
+  \*********************************************/
+/*! exports provided: reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var _actions_layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../actions/layout */ "./src/app/articles/actions/layout.ts");
+
+var initialState = {
+    isGridView: true,
+    isListView: false,
+};
+function reducer(state, action) {
+    if (state === void 0) { state = initialState; }
+    switch (action.type) {
+        case _actions_layout__WEBPACK_IMPORTED_MODULE_0__["LayoutActionTypes"].GridView: {
+            return {
+                isGridView: true,
+                isListView: false,
+            };
+        }
+        case _actions_layout__WEBPACK_IMPORTED_MODULE_0__["LayoutActionTypes"].ListView: {
+            return {
+                isGridView: false,
+                isListView: true,
+            };
+        }
+        default: return state;
+    }
+}
 
 
 /***/ }),
@@ -3062,9 +3348,6 @@ var ArticleHttpService = /** @class */ (function () {
     };
     ArticleHttpService.prototype.getArticles = function () {
         return this.http.get("/api/articles");
-    };
-    ArticleHttpService.prototype.getLatestArticles = function (size) {
-        return this.http.get("/api/articles/latest/" + size);
     };
     ArticleHttpService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),

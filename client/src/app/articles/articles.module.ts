@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap"
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -12,15 +13,17 @@ import { ArticleEffects } from "./effects/article"
 import { reducers } from "./reducers"
 
 import { ArticlesHomePageComponent } from './containers/articles-home-page/articles-home-page.component';
-import { ArticlesHomeGridComponent } from './components/articles-home-grid/articles-home-grid.component';
 import { ArticlesHomeSubMenuComponent } from './components/articles-home-sub-menu/articles-home-sub-menu.component';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
 import { ArticleHttpService } from './services/article-http.service';
+import { ArticlesListingComponent } from './components/articles-listing/articles-listing.component';
+import { ArticlesLoadButtonComponent } from './components/articles-load-button/articles-load-button.component';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule, 
+    NgbModule,
     RouterModule.forChild([
         { path: "", component: ArticlesHomePageComponent }
     ]),
@@ -29,6 +32,6 @@ import { ArticleHttpService } from './services/article-http.service';
     EffectsModule.forFeature([ArticleEffects])
   ],
   providers: [ArticleHttpService],
-  declarations: [ArticlesHomePageComponent, ArticlesHomeGridComponent, ArticlesHomeSubMenuComponent, ArticleCardComponent]
+  declarations: [ArticlesHomePageComponent, ArticlesHomeSubMenuComponent, ArticleCardComponent, ArticlesListingComponent, ArticlesLoadButtonComponent]
 })
 export class ArticlesModule {}

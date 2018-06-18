@@ -1,2 +1,3 @@
-<articles-home-sub-menu></articles-home-sub-menu>
-<articles-home-grid [articles]="articles | async"></articles-home-grid>
+<articles-home-sub-menu (gridClicked)="loadGridView()" (listClicked)="loadListView()"
+(sortByNewest)="sortByNewest()" (sortByOldest)="sortByOldest()" (sortByPopular)="sortByPopular()" [sortedBy]="sort"></articles-home-sub-menu>
+<articles-listing [articles]="articles | async" [isGridView]="isGridView | async" [isListView]="isListView | async"></articles-listing>

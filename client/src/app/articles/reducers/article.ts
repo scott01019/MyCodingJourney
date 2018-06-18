@@ -1,12 +1,12 @@
-import { createSelector } from "@ngrx/store"
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity"
-import { Article } from "./../models/article"
+import { Article, ARTICLE_SORTS } from "./../models/article"
 import { ArticleActions, ArticleActionTypes } from "./../actions/article"
 
 export interface State extends EntityState<Article> {
     currentArticleId: string | null
     error: string | null
     loading: boolean
+    sortBy: ARTICLE_SORTS
 }
 
 export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
@@ -17,7 +17,8 @@ export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
 export const initialState: State = adapter.getInitialState({
     currentArticleId: null,
     error: null,
-    loading: false
+    loading: false,
+    sortBy: ARTICLE_SORTS.LATEST
 })
 
 export function reducer(state = initialState, action: ArticleActions): State {
@@ -25,8 +26,6 @@ export function reducer(state = initialState, action: ArticleActions): State {
         case ArticleActionTypes.Load: {
             return { 
                 ...state, 
-                currentArticleId: state.currentArticleId, 
-                error: null, 
                 loading: true 
             }
         }
@@ -35,7 +34,6 @@ export function reducer(state = initialState, action: ArticleActions): State {
             return adapter.addOne(action.payload, {
                 ...state,
                 currentArticleId: action.payload._id,
-                error: null,
                 loading: false
             })
         }
@@ -43,36 +41,37 @@ export function reducer(state = initialState, action: ArticleActions): State {
         case ArticleActionTypes.LoadError: {
             return {
                 ...state, 
-                currentArticleId: state.currentArticleId,
                 error: action.payload,
                 loading: false
             }
         }
 
-        case ArticleActionTypes.LoadLatest: {
+        case ArticleActionTypes.LoadAll: {
             return {
                 ...state,
-                currentArticleId: state.currentArticleId,
-                error: null,
                 loading: true
             }
         }
 
-        case ArticleActionTypes.LoadLatestSuccess: {
+        case ArticleActionTypes.LoadAllSuccess: {
             return adapter.addMany(action.payload, {
                 ...state,
-                currentArticleId: state.currentArticleId,
-                error: null,
                 loading: false
             })
         }
 
-        case ArticleActionTypes.LoadLatestError: {
+        case ArticleActionTypes.LoadAllError: {
             return {
                 ...state,
-                currentArticleId: state.currentArticleId,
                 error: action.payload,
                 loading: false
+            }
+        }
+
+        case ArticleActionTypes.SortBy: {
+            return {
+                ...state,
+                sortBy: action.payload
             }
         }
 
@@ -80,5 +79,3 @@ export function reducer(state = initialState, action: ArticleActions): State {
     }
 
 }
-
-export const getCurrentArticleId = (state: State) => state.currentArticleId

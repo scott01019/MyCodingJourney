@@ -5,9 +5,10 @@ const articles = require("./../controllers/articles")
 
 module.exports = (app) => {
     app.get("/api/articles/:id", (req, res) => { articles.article(req, res) })
-    app.get("/api/articles/latest/:size", (req, res) => { articles.latestArticles(req, res) })
+    app.get("/api/articles", (req, res) => { articles.articles(req, res) })
 
-    // app.get("/api/conversations/:id", (req, res) => { conversations.conversation(req, res) })
+    app.get("/api/discussions/:id", (req, res) => { conversations.conversation(req, res) })
+    
     // app.post("/api/conversations/create", (req, res) => { conversations.createConversation(req, res) })
     // app.put("/api/conversations/:id", (req, res) => { conversations.updateConversations(req, res) })
 

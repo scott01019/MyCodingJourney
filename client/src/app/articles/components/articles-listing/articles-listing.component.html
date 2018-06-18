@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <ng-container *ngFor="let article of articles">
-            <div class="col-4 mb-3">
+            <div [ngClass]="{'col-4': isGridView }" class="mb-3">
                 <article-card [article]="article"></article-card>
             </div>
         </ng-container>

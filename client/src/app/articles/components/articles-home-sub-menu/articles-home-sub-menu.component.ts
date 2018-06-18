@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { faFilter, faList, faTh } from "@fortawesome/free-solid-svg-icons"
+import { ARTICLE_SORTS } from '../../models/article';
 
 @Component({
     selector: 'articles-home-sub-menu',
@@ -11,6 +12,10 @@ export class ArticlesHomeSubMenuComponent implements OnInit {
     faList = faList
     faTh = faTh
 
+    @Input() sortedBy: ARTICLE_SORTS
+    @Output() sortByNewest = new EventEmitter()
+    @Output() sortByOldest = new EventEmitter()
+    @Output() sortByPopular = new EventEmitter()
     @Output() filterClicked = new EventEmitter()
     @Output() listClicked = new EventEmitter()
     @Output() gridClicked = new EventEmitter()
@@ -19,5 +24,4 @@ export class ArticlesHomeSubMenuComponent implements OnInit {
 
     ngOnInit() {
     }
-
 }

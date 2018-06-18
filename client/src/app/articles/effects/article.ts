@@ -5,7 +5,7 @@ import { map, catchError, switchMap } from "rxjs/operators"
 import { ArticleHttpService } from "./../services/article-http.service"
 
 import { Article } from "./../models/article"
-import { ArticleActionTypes, Load, LoadError, LoadSuccess, LoadLatest, LoadLatestSuccess, LoadLatestError } from "./../actions/article"
+import { ArticleActionTypes, Load, LoadError, LoadSuccess, LoadAllSuccess, LoadAll, LoadAllError } from "./../actions/article"
 import { Injectable } from "@angular/core";
 
 @Injectable()
@@ -23,12 +23,11 @@ export class ArticleEffects {
     )
 
     @Effect()
-    loadLatest$: Observable<Action> = this.actions$.pipe(
-        ofType<LoadLatest>(ArticleActionTypes.LoadLatest),
-        map(action => action.payload),
-        switchMap((size: number) => this.articleService.getLatestArticles(size).pipe(
-            map((articles: Article[]) => new LoadLatestSuccess(articles)),
-            catchError(err => of(new LoadLatestError(err)))
+    loadAll$: Observable<Action> = this.actions$.pipe(
+        ofType<LoadAll>(ArticleActionTypes.LoadAll),
+        switchMap(() => this.articleService.getArticles().pipe(
+            map((articles: Article[]) => new LoadAllSuccess(articles)),
+            catchError(err => of(new LoadAllError(err)))
         ))
     )
 }

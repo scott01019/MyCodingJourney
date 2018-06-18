@@ -1,13 +1,14 @@
 import { Action } from "@ngrx/store"
-import { Article } from "../models/article"
+import { Article, ARTICLE_SORTS } from "../models/article"
 
 export enum ArticleActionTypes {
     Load = "[Article] Load",
     LoadSuccess = "[Article] Load Success",
     LoadError = "[Article] Load Error",
-    LoadLatest = "[Article] Load Latest",
-    LoadLatestSuccess = "[Article] Load Latest Success",
-    LoadLatestError = "[Article] Load Latest Error"
+    LoadAll = "[Article] Load Many",
+    LoadAllSuccess = "[Article] Load Many Success",
+    LoadAllError = "[Article] Load Many Error",
+    SortBy = "[Article] Sort By"
 }
 
 export class Load implements Action {
@@ -25,19 +26,24 @@ export class LoadError implements Action {
     constructor(public payload: string) {}
 }
 
-export class LoadLatest implements Action {
-    readonly type = ArticleActionTypes.LoadLatest
-    constructor(public payload: number) {}
+export class LoadAll implements Action {
+    readonly type = ArticleActionTypes.LoadAll
 }
 
-export class LoadLatestSuccess implements Action {
-    readonly type = ArticleActionTypes.LoadLatestSuccess
+export class LoadAllSuccess implements Action {
+    readonly type = ArticleActionTypes.LoadAllSuccess
     constructor(public payload: Article[]) {}
 }
 
-export class LoadLatestError implements Action {
-    readonly type = ArticleActionTypes.LoadLatestError
+export class LoadAllError implements Action {
+    readonly type = ArticleActionTypes.LoadAllError
     constructor(public payload: string) {}
 }
 
-export type ArticleActions = Load | LoadSuccess | LoadError | LoadLatest | LoadLatestError | LoadLatestSuccess
+export class SortBy implements Action {
+    readonly type = ArticleActionTypes.SortBy
+    constructor(public payload: ARTICLE_SORTS) {}
+}
+
+
+export type ArticleActions = Load | LoadSuccess | LoadError | LoadAll | LoadAllError | LoadAllSuccess | SortBy

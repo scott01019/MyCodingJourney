@@ -1,9 +1,12 @@
 import { createSelector, createFeatureSelector, ActionReducerMap } from "@ngrx/store"
 import * as fromArticles from "./article"
+import * as fromLayout from "./layout"
 import * as fromRoot from "./../../reducers"
+import { ARTICLE_SORTS, latestCmp, oldestCmp, popularCmp } from "../models/article";
 
 export interface ArticlesState {
     articles: fromArticles.State
+    layout: fromLayout.State
 }
 
 export interface State extends fromRoot.State {
@@ -11,19 +14,36 @@ export interface State extends fromRoot.State {
 }
 
 export const reducers: ActionReducerMap<ArticlesState> = {
-    articles: fromArticles.reducer
+    articles: fromArticles.reducer,
+    layout: fromLayout.reducer
 }
 
-export const getArticlesState = createFeatureSelector<ArticlesState>("articles")
+// articles selectors
+export const articlesFeatureSelector = createFeatureSelector<ArticlesState>("articles")
 
 export const getArticleEntitiesState = createSelector(
-    getArticlesState,
+    articlesFeatureSelector,
     state => state.articles
 )
 
 export const getCurrentArticleId = createSelector(
     getArticleEntitiesState,
-    fromArticles.getCurrentArticleId
+    state => state.currentArticleId
+)
+
+export const getError = createSelector(
+    getArticleEntitiesState,
+    state => state.error
+)
+
+export const getLoading = createSelector(
+    getArticleEntitiesState,
+    state => state.loading
+)
+
+export const getSort = createSelector(
+    getArticleEntitiesState,
+    state => state.sortBy
 )
 
 export const {
@@ -32,3 +52,30 @@ export const {
     selectAll: getAllArticles,
     selectTotal: getTotalArticles
 } = fromArticles.adapter.getSelectors(getArticleEntitiesState)
+
+export const getSortedArticles = createSelector(
+    getAllArticles,
+    getSort,
+    (articles, sort) => {
+        if (sort == ARTICLE_SORTS.LATEST) return articles.sort(latestCmp)
+        if (sort == ARTICLE_SORTS.OLDEST) return articles.sort(oldestCmp)
+        if (sort == ARTICLE_SORTS.POPULAR) return articles.sort(popularCmp)
+        return articles
+    }
+)
+
+// layout selectors
+export const getLayoutState = createSelector(
+    articlesFeatureSelector,
+    state => state.layout
+)
+
+export const getIsGridView = createSelector(
+    getLayoutState,
+    state => state.isGridView
+)
+
+export const getIsListView = createSelector(
+    getLayoutState,
+    state => state.isListView
+)
