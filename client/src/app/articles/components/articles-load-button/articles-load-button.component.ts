@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'articles-load-button',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticlesLoadButtonComponent implements OnInit {
 
+    click = new EventEmitter()
+
     constructor() { }
 
     ngOnInit() {
     }
-
 }

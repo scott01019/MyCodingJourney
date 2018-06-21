@@ -1,28 +1,26 @@
-<div class="card rounded-0">
-    <a>
+<a [routerLink]="['/articles', article._id ]">
+    <div class="card rounded-0 h-100">
         <img class="card-img-top" src="{{ article.img }}">
-    </a>
-    <div class="card-body">
-        <a>
+        <div class="card-body">
             <h5 class="card-title">{{ article.title }}</h5>
-        </a>
-        <ul class="list-inline">
-            <li class="list-inline-item">
-                <button class="btn btn-short btn-light">{{ article.numLikes }} Likes</button>
-            </li>
-            <li class="list-inline-item">
-                <button class="btn btn-short btn-light">{{ article.numComments }} Comments</button>
-            </li>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <button class="btn btn-short btn-light">{{ article.numLikes }} Likes</button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-short btn-light">{{ article.numComments }} Comments</button>
+                </li>
 
-        </ul>
-        <div class="media">
-            <img class="rounded-circle mr-3 author-img" src="./../../../assets/scott_burnette_pic.jpg" alt="Generic placeholder image">
-            <div class="media-body">
-                <a href="#" class="small text-dark">Scott Burnette</a>
-                <p class="card-text">
-                    <small class="text-muted">{{ article.createdAt | date }}</small>
-                </p>
+            </ul>
+            <div class="media">
+                <img class="rounded-circle mr-3 author-img" src="./../../../assets/scott_burnette_pic.jpg" alt="Generic placeholder image">
+                <div class="media-body">
+                    <a href="#" class="small text-dark">Scott Burnette</a>
+                    <p class="card-text">
+                        <small class="text-muted">{{ article.createdAt | date }}</small>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</a>

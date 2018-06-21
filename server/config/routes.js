@@ -1,4 +1,5 @@
 const articles = require("./../controllers/articles")
+const discussions = require("./../controllers/discussions")
 // const conversations = require("./../controllers/conversations")
 // const comments = require("./../controllers/comments")
 // const users = require("./../controllers/users")
@@ -7,7 +8,7 @@ module.exports = (app) => {
     app.get("/api/articles/:id", (req, res) => { articles.article(req, res) })
     app.get("/api/articles", (req, res) => { articles.articles(req, res) })
 
-    app.get("/api/discussions/:id", (req, res) => { conversations.conversation(req, res) })
+    app.get("/api/discussions/:id", (req, res) => { discussions.discussion(req, res) })
     
     // app.post("/api/conversations/create", (req, res) => { conversations.createConversation(req, res) })
     // app.put("/api/conversations/:id", (req, res) => { conversations.updateConversations(req, res) })

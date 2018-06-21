@@ -10,6 +10,9 @@ import { DiscussionEffects } from "./effects/discussion"
 
 import { reducers } from "./reducers"
 import { DiscussionHttpService } from "./services/discussion-http.service";
+import { ConversationComponent } from "./components/conversation/conversation.component";
+import { CommentComponent } from './components/comment/comment.component';
+import { DiscussionContainerComponent } from './containers/discussion-container/discussion-container.component';
 
 @NgModule({
     imports: [
@@ -19,6 +22,12 @@ import { DiscussionHttpService } from "./services/discussion-http.service";
         StoreModule.forFeature("discussions", reducers),
         EffectsModule.forFeature([DiscussionEffects])
     ],
-    providers: [DiscussionHttpService]
+    exports: [
+        DiscussionContainerComponent,
+        ConversationComponent,
+        CommentComponent
+    ],
+    providers: [DiscussionHttpService],
+    declarations: [ ConversationComponent, CommentComponent, DiscussionContainerComponent]
 })
 export class DiscussionsModule {}

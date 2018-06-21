@@ -5,7 +5,7 @@ import { map, catchError, switchMap } from "rxjs/operators"
 import { ArticleHttpService } from "./../services/article-http.service"
 
 import { Article } from "./../models/article"
-import { ArticleActionTypes, Load, LoadError, LoadSuccess, LoadAllSuccess, LoadAll, LoadAllError } from "./../actions/article"
+import { ArticleActionTypes, Load, LoadError, LoadSuccess, LoadAllSuccess, LoadAll, LoadAllError, SetCurrentArticleId } from "./../actions/article"
 import { Injectable } from "@angular/core";
 
 @Injectable()

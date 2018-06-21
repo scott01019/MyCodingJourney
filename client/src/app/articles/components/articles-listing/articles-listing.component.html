@@ -1,9 +1,11 @@
 <div class="container">
     <div class="row">
-        <ng-container *ngFor="let article of articles">
-            <div [ngClass]="{'col-4': isGridView }" class="mb-3">
-                <article-card [article]="article"></article-card>
-            </div>
+        <ng-container *ngFor="let article of articles; let i=index">
+            <ng-container *ngIf="i<limit">
+                <div [ngClass]="{'col-4': isGridView }" class="mb-3">
+                    <article-card [article]="article"></article-card>
+                </div>
+            </ng-container>
         </ng-container>
     </div>
 </div>

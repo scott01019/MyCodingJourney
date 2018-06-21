@@ -1,5 +1,4 @@
 import { Action } from "@ngrx/store"
-import { ARTICLE_SORTS } from "../models/article";
 
 export enum LayoutActionTypes {
     GridView = "[Layout] Grid View",

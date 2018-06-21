@@ -5,6 +5,7 @@ import { DiscussionActions, DiscussionActionTypes } from "./../actions/discussio
 export interface State extends EntityState<Discussion> {
     error: string | null
     loading: boolean
+    currentDiscussionId: string
 }
 
 export const adapter: EntityAdapter<Discussion> = createEntityAdapter<Discussion>({
@@ -14,7 +15,8 @@ export const adapter: EntityAdapter<Discussion> = createEntityAdapter<Discussion
 
 export const initialState: State = adapter.getInitialState({
     error: null,
-    loading: false
+    loading: false,
+    currentDiscussionId: null
 })
 
 export function reducer(state = initialState, action: DiscussionActions): State {
@@ -22,7 +24,6 @@ export function reducer(state = initialState, action: DiscussionActions): State 
         case DiscussionActionTypes.Load: {
             return {
                 ...state,
-                error: null,
                 loading: true
             }
         }
@@ -40,6 +41,13 @@ export function reducer(state = initialState, action: DiscussionActions): State 
                 ...state,
                 error: action.payload,
                 loading: false
+            }
+        }
+
+        case DiscussionActionTypes.SetCurrentDiscussionId: {
+            return {
+                ...state,
+                currentDiscussionId: action.payload
             }
         }
 

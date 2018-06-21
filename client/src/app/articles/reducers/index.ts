@@ -46,6 +46,11 @@ export const getSort = createSelector(
     state => state.sortBy
 )
 
+export const getLimit = createSelector(
+    getArticleEntitiesState,
+    state => state.limit
+)
+
 export const {
     selectIds: getArticlesIds,
     selectEntities: getArticleEntities,
@@ -62,6 +67,12 @@ export const getSortedArticles = createSelector(
         if (sort == ARTICLE_SORTS.POPULAR) return articles.sort(popularCmp)
         return articles
     }
+)
+
+export const getCurrentArticle = createSelector(
+    getArticleEntities,
+    getCurrentArticleId,
+    (entities, id) => entities[id]
 )
 
 // layout selectors

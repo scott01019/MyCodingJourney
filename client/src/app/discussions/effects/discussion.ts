@@ -4,11 +4,10 @@ import { Observable, of } from "rxjs";
 import { Effect, Actions, ofType } from "@ngrx/effects"
 import { Action } from "@ngrx/store";
 
-import { Load, DiscussionActionTypes, LoadSuccess } from "../actions/discussion";
+import { Load, DiscussionActionTypes, LoadSuccess, LoadError } from "../actions/discussion";
 import { DiscussionHttpService } from "../services/discussion-http.service";
 import { map, switchMap, catchError } from "rxjs/operators";
 import { Discussion } from "../models/discussion";
-import { LoadError } from "../../articles/actions/article";
 
 @Injectable()
 export class DiscussionEffects {

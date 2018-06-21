@@ -1,0 +1,18 @@
+<div class="media mt-5">
+    <fa-icon [icon]="faUser" size="4x" class="mr-2"></fa-icon>
+    <div class="media-body">
+        <h5 class="my-0">Posted By: {{ comment.user.userId }}</h5>
+        <div>
+            {{ comment.content }}
+            <ul class="list-inline font-weight-bold text-secondary small">
+                <li class="list-inline-item">{{ comment.likedBy.length }}</li>
+                <li class="list-inline-item">
+                    <fa-icon [icon]="faChevronUp"></fa-icon>
+                </li>
+                <li class="list-inline-item">
+                    <em class="text-secondary small">{{ comment.createdAt | date }}</em>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

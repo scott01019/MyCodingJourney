@@ -3,12 +3,12 @@ export interface Article {
     title: string
     subTitle: string
     img: string
-    contents: [{ component: string, content: string, style: string }]
+    contents: [{ _id: string, component: string, content: string, style: string }]
     likedBy: [string]
     numLikes: number
     numComments: number
     tags: [string]
-    discussion: [string]
+    discussion: string
     createdAt: Date
     updatedAt: Date
 }

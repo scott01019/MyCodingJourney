@@ -18,6 +18,9 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
 import { ArticleHttpService } from './services/article-http.service';
 import { ArticlesListingComponent } from './components/articles-listing/articles-listing.component';
 import { ArticlesLoadButtonComponent } from './components/articles-load-button/articles-load-button.component';
+import { ArticlePageComponent } from './containers/article-page/article-page.component';
+import { ArticleComponent } from './components/article/article.component';
+import { DiscussionsModule } from '../discussions/discussions.module';
 
 @NgModule({
   imports: [
@@ -25,13 +28,15 @@ import { ArticlesLoadButtonComponent } from './components/articles-load-button/a
     HttpClientModule, 
     NgbModule,
     RouterModule.forChild([
-        { path: "", component: ArticlesHomePageComponent }
+        { path: "", component: ArticlesHomePageComponent },
+        { path: ":id", component: ArticlePageComponent }
     ]),
     FontAwesomeModule,
     StoreModule.forFeature("articles", reducers),
-    EffectsModule.forFeature([ArticleEffects])
+    EffectsModule.forFeature([ArticleEffects]),
+    DiscussionsModule
   ],
   providers: [ArticleHttpService],
-  declarations: [ArticlesHomePageComponent, ArticlesHomeSubMenuComponent, ArticleCardComponent, ArticlesListingComponent, ArticlesLoadButtonComponent]
+  declarations: [ArticlesHomePageComponent, ArticlesHomeSubMenuComponent, ArticleCardComponent, ArticlesListingComponent, ArticlesLoadButtonComponent, ArticlePageComponent, ArticleComponent]
 })
 export class ArticlesModule {}

@@ -1,36 +1,36 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Store, select } from '@ngrx/store';
 
 import * as fromArticles from "./../../reducers/"
 import * as articleActions from "./../../actions/article"
-import { Article, ARTICLE_SORTS, latestCmp, popularCmp, oldestCmp } from '../../models/article';
+import { Article, ARTICLE_SORTS } from '../../models/article';
 import * as layoutActions from '../../actions/layout';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'articles-home-page',
     templateUrl: './articles-home-page.component.html',
     styleUrls: ['./articles-home-page.component.scss']
 })
-export class ArticlesHomePageComponent implements OnInit, OnDestroy {
+export class ArticlesHomePageComponent implements OnInit {
 
     articles: Observable<Article[]>
     isGridView: Observable<boolean>
     isListView: Observable<boolean>
     loading: Observable<boolean>
     error: Observable<string>
-    sort: ARTICLE_SORTS
-    sortSubscription: Subscription
+    sortBy: Observable<ARTICLE_SORTS>
+    limit: Observable<number>
     
-    constructor(public store: Store<fromArticles.State>) {
+    constructor(private store: Store<fromArticles.State>) {
         this.loading = this.store.pipe(select(fromArticles.getLoading))
         this.isListView = this.store.pipe(select(fromArticles.getIsListView))
         this.isGridView = this.store.pipe(select(fromArticles.getIsGridView))
         this.error = this.store.pipe(select(fromArticles.getError))
-        this.sortSubscription = this.store.pipe(select(fromArticles.getSort)).subscribe(sort => { this.sort = sort })
+        this.sortBy = this.store.pipe(select(fromArticles.getSort))
         this.articles = this.store.pipe(select(fromArticles.getSortedArticles))
+        this.limit = this.store.pipe(select(fromArticles.getLimit))
     }
 
     ngOnInit() {
@@ -57,7 +57,7 @@ export class ArticlesHomePageComponent implements OnInit, OnDestroy {
         this.store.dispatch(new articleActions.SortBy(ARTICLE_SORTS.POPULAR))
     }
 
-    ngOnDestroy() {
-        this.sortSubscription.unsubscribe()
+    increaseArticleLimit() {
+        this.store.dispatch(new articleActions.IncreaseLimit(9))
     }
 }

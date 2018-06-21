@@ -1,3 +1,4 @@
 <articles-home-sub-menu (gridClicked)="loadGridView()" (listClicked)="loadListView()"
-(sortByNewest)="sortByNewest()" (sortByOldest)="sortByOldest()" (sortByPopular)="sortByPopular()" [sortedBy]="sort"></articles-home-sub-menu>
-<articles-listing [articles]="articles | async" [isGridView]="isGridView | async" [isListView]="isListView | async"></articles-listing>
+(sortByNewest)="sortByNewest()" (sortByOldest)="sortByOldest()" (sortByPopular)="sortByPopular()" [sortedBy]="sortBy | async"></articles-home-sub-menu>
+<articles-listing [articles]="articles | async" [limit]="limit | async" [isGridView]="isGridView | async" [isListView]="isListView | async"></articles-listing>
+<articles-load-button *ngIf="(limit | async) < (articles | async).length" (click)="increaseArticleLimit()"></articles-load-button>

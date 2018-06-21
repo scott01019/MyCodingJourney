@@ -2444,7 +2444,7 @@ function createEntityAdapter(options) {
 /*!*********************************************!*\
   !*** ./src/app/articles/actions/article.ts ***!
   \*********************************************/
-/*! exports provided: ArticleActionTypes, Load, LoadSuccess, LoadError, LoadAll, LoadAllSuccess, LoadAllError, SortBy */
+/*! exports provided: ArticleActionTypes, Load, LoadSuccess, LoadError, LoadAll, LoadAllSuccess, LoadAllError, SortBy, IncreaseLimit, SetCurrentArticleId */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2457,6 +2457,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadAllSuccess", function() { return LoadAllSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadAllError", function() { return LoadAllError; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortBy", function() { return SortBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IncreaseLimit", function() { return IncreaseLimit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetCurrentArticleId", function() { return SetCurrentArticleId; });
 var ArticleActionTypes;
 (function (ArticleActionTypes) {
     ArticleActionTypes["Load"] = "[Article] Load";
@@ -2466,6 +2468,8 @@ var ArticleActionTypes;
     ArticleActionTypes["LoadAllSuccess"] = "[Article] Load Many Success";
     ArticleActionTypes["LoadAllError"] = "[Article] Load Many Error";
     ArticleActionTypes["SortBy"] = "[Article] Sort By";
+    ArticleActionTypes["IncreaseLimit"] = "[Article] Increase Limit";
+    ArticleActionTypes["SetCurrentArticleId"] = "[Article] Set Current Article Id";
 })(ArticleActionTypes || (ArticleActionTypes = {}));
 var Load = /** @class */ (function () {
     function Load(payload) {
@@ -2520,6 +2524,22 @@ var SortBy = /** @class */ (function () {
         this.type = ArticleActionTypes.SortBy;
     }
     return SortBy;
+}());
+
+var IncreaseLimit = /** @class */ (function () {
+    function IncreaseLimit(payload) {
+        this.payload = payload;
+        this.type = ArticleActionTypes.IncreaseLimit;
+    }
+    return IncreaseLimit;
+}());
+
+var SetCurrentArticleId = /** @class */ (function () {
+    function SetCurrentArticleId(payload) {
+        this.payload = payload;
+        this.type = ArticleActionTypes.SetCurrentArticleId;
+    }
+    return SetCurrentArticleId;
 }());
 
 
@@ -2587,12 +2607,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_article_http_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./services/article-http.service */ "./src/app/articles/services/article-http.service.ts");
 /* harmony import */ var _components_articles_listing_articles_listing_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/articles-listing/articles-listing.component */ "./src/app/articles/components/articles-listing/articles-listing.component.ts");
 /* harmony import */ var _components_articles_load_button_articles_load_button_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/articles-load-button/articles-load-button.component */ "./src/app/articles/components/articles-load-button/articles-load-button.component.ts");
+/* harmony import */ var _containers_article_page_article_page_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./containers/article-page/article-page.component */ "./src/app/articles/containers/article-page/article-page.component.ts");
+/* harmony import */ var _components_article_article_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/article/article.component */ "./src/app/articles/components/article/article.component.ts");
+/* harmony import */ var _discussions_discussions_module__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../discussions/discussions.module */ "./src/app/discussions/discussions.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -2619,14 +2645,16 @@ var ArticlesModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild([
-                    { path: "", component: _containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_10__["ArticlesHomePageComponent"] }
+                    { path: "", component: _containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_10__["ArticlesHomePageComponent"] },
+                    { path: ":id", component: _containers_article_page_article_page_component__WEBPACK_IMPORTED_MODULE_16__["ArticlePageComponent"] }
                 ]),
                 _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeModule"],
                 _ngrx_store__WEBPACK_IMPORTED_MODULE_5__["StoreModule"].forFeature("articles", _reducers__WEBPACK_IMPORTED_MODULE_9__["reducers"]),
-                _ngrx_effects__WEBPACK_IMPORTED_MODULE_6__["EffectsModule"].forFeature([_effects_article__WEBPACK_IMPORTED_MODULE_8__["ArticleEffects"]])
+                _ngrx_effects__WEBPACK_IMPORTED_MODULE_6__["EffectsModule"].forFeature([_effects_article__WEBPACK_IMPORTED_MODULE_8__["ArticleEffects"]]),
+                _discussions_discussions_module__WEBPACK_IMPORTED_MODULE_18__["DiscussionsModule"]
             ],
             providers: [_services_article_http_service__WEBPACK_IMPORTED_MODULE_13__["ArticleHttpService"]],
-            declarations: [_containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_10__["ArticlesHomePageComponent"], _components_articles_home_sub_menu_articles_home_sub_menu_component__WEBPACK_IMPORTED_MODULE_11__["ArticlesHomeSubMenuComponent"], _components_article_card_article_card_component__WEBPACK_IMPORTED_MODULE_12__["ArticleCardComponent"], _components_articles_listing_articles_listing_component__WEBPACK_IMPORTED_MODULE_14__["ArticlesListingComponent"], _components_articles_load_button_articles_load_button_component__WEBPACK_IMPORTED_MODULE_15__["ArticlesLoadButtonComponent"]]
+            declarations: [_containers_articles_home_page_articles_home_page_component__WEBPACK_IMPORTED_MODULE_10__["ArticlesHomePageComponent"], _components_articles_home_sub_menu_articles_home_sub_menu_component__WEBPACK_IMPORTED_MODULE_11__["ArticlesHomeSubMenuComponent"], _components_article_card_article_card_component__WEBPACK_IMPORTED_MODULE_12__["ArticleCardComponent"], _components_articles_listing_articles_listing_component__WEBPACK_IMPORTED_MODULE_14__["ArticlesListingComponent"], _components_articles_load_button_articles_load_button_component__WEBPACK_IMPORTED_MODULE_15__["ArticlesLoadButtonComponent"], _containers_article_page_article_page_component__WEBPACK_IMPORTED_MODULE_16__["ArticlePageComponent"], _components_article_article_component__WEBPACK_IMPORTED_MODULE_17__["ArticleComponent"]]
         })
     ], ArticlesModule);
     return ArticlesModule;
@@ -2643,7 +2671,7 @@ var ArticlesModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card rounded-0\">\n    <a>\n        <img class=\"card-img-top\" src=\"{{ article.img }}\">\n    </a>\n    <div class=\"card-body\">\n        <a>\n            <h5 class=\"card-title\">{{ article.title }}</h5>\n        </a>\n        <ul class=\"list-inline\">\n            <li class=\"list-inline-item\">\n                <button class=\"btn btn-short btn-light\">{{ article.numLikes }} Likes</button>\n            </li>\n            <li class=\"list-inline-item\">\n                <button class=\"btn btn-short btn-light\">{{ article.numComments }} Comments</button>\n            </li>\n\n        </ul>\n        <div class=\"media\">\n            <img class=\"rounded-circle mr-3 author-img\" src=\"./../../../assets/scott_burnette_pic.jpg\" alt=\"Generic placeholder image\">\n            <div class=\"media-body\">\n                <a href=\"#\" class=\"small text-dark\">Scott Burnette</a>\n                <p class=\"card-text\">\n                    <small class=\"text-muted\">{{ article.createdAt | date }}</small>\n                </p>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<a [routerLink]=\"['/articles', article._id ]\">\n    <div class=\"card rounded-0 h-100\">\n        <img class=\"card-img-top\" src=\"{{ article.img }}\">\n        <div class=\"card-body\">\n            <h5 class=\"card-title\">{{ article.title }}</h5>\n            <ul class=\"list-inline\">\n                <li class=\"list-inline-item\">\n                    <button class=\"btn btn-short btn-light\">{{ article.numLikes }} Likes</button>\n                </li>\n                <li class=\"list-inline-item\">\n                    <button class=\"btn btn-short btn-light\">{{ article.numComments }} Comments</button>\n                </li>\n\n            </ul>\n            <div class=\"media\">\n                <img class=\"rounded-circle mr-3 author-img\" src=\"./../../../assets/scott_burnette_pic.jpg\" alt=\"Generic placeholder image\">\n                <div class=\"media-body\">\n                    <a href=\"#\" class=\"small text-dark\">Scott Burnette</a>\n                    <p class=\"card-text\">\n                        <small class=\"text-muted\">{{ article.createdAt | date }}</small>\n                    </p>\n                </div>\n            </div>\n        </div>\n    </div>\n</a>"
 
 /***/ }),
 
@@ -2692,11 +2720,78 @@ var ArticleCardComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'article-card',
             template: __webpack_require__(/*! ./article-card.component.html */ "./src/app/articles/components/article-card/article-card.component.html"),
-            styles: [__webpack_require__(/*! ./article-card.component.scss */ "./src/app/articles/components/article-card/article-card.component.scss")]
+            styles: [__webpack_require__(/*! ./article-card.component.scss */ "./src/app/articles/components/article-card/article-card.component.scss")],
         }),
         __metadata("design:paramtypes", [])
     ], ArticleCardComponent);
     return ArticleCardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/articles/components/article/article.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/articles/components/article/article.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col\">\n            <img class=\"img-fluid\" src=\"{{ article?.imgSrc }}\">\n            <h2>{{ article?.title }}</h2>\n            <h3>{{ article?.subTitle }}</h3>\n            <ng-container *ngFor=\"let content of article?.contents\">\n                <ng-container [ngSwitch]=\"content.component\">\n                    <h4 *ngSwitchCase=\"'Header'\" class=\"font-weight-bold\">{{ content.content }}</h4>\n                    <p *ngSwitchCase=\"'Paragraph'\">{{ content.content }}</p>\n                    <img *ngSwitchCase=\"'Image'\" class=\"img-fluid mx-auto\" src=\"{{ content.content }}\">\n                    <p *ngSwitchCase=\"'CodeBlock'\" class=\"bg-light mx-auto p-3\">{{ content.content }}</p>\n                </ng-container>\n            </ng-container>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/articles/components/article/article.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/articles/components/article/article.component.scss ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/articles/components/article/article.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/articles/components/article/article.component.ts ***!
+  \******************************************************************/
+/*! exports provided: ArticleComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticleComponent", function() { return ArticleComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ArticleComponent = /** @class */ (function () {
+    function ArticleComponent() {
+    }
+    ArticleComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ArticleComponent.prototype, "article", void 0);
+    ArticleComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'article',
+            template: __webpack_require__(/*! ./article.component.html */ "./src/app/articles/components/article/article.component.html"),
+            styles: [__webpack_require__(/*! ./article.component.scss */ "./src/app/articles/components/article/article.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ArticleComponent);
+    return ArticleComponent;
 }());
 
 
@@ -2814,7 +2909,7 @@ var ArticlesHomeSubMenuComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <ng-container *ngFor=\"let article of articles\">\n            <div [ngClass]=\"{'col-4': isGridView }\" class=\"mb-3\">\n                <article-card [article]=\"article\"></article-card>\n            </div>\n        </ng-container>\n    </div>\n</div>"
+module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <ng-container *ngFor=\"let article of articles; let i=index\">\n            <ng-container *ngIf=\"i<limit\">\n                <div [ngClass]=\"{'col-4': isGridView }\" class=\"mb-3\">\n                    <article-card [article]=\"article\"></article-card>\n                </div>\n            </ng-container>\n        </ng-container>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -2861,6 +2956,10 @@ var ArticlesListingComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Array)
     ], ArticlesListingComponent.prototype, "articles", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], ArticlesListingComponent.prototype, "limit", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Boolean)
@@ -2929,6 +3028,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var ArticlesLoadButtonComponent = /** @class */ (function () {
     function ArticlesLoadButtonComponent() {
+        this.click = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     ArticlesLoadButtonComponent.prototype.ngOnInit = function () {
     };
@@ -2947,6 +3047,90 @@ var ArticlesLoadButtonComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/articles/containers/article-page/article-page.component.html":
+/*!******************************************************************************!*\
+  !*** ./src/app/articles/containers/article-page/article-page.component.html ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<article [article]=\"article | async\"></article>\n<ng-container *ngIf=\"(article | async)\">\n    <discussion-container [discussionId]=\"(article | async).discussion\"></discussion-container>\n</ng-container>"
+
+/***/ }),
+
+/***/ "./src/app/articles/containers/article-page/article-page.component.scss":
+/*!******************************************************************************!*\
+  !*** ./src/app/articles/containers/article-page/article-page.component.scss ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/articles/containers/article-page/article-page.component.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/articles/containers/article-page/article-page.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: ArticlePageComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArticlePageComponent", function() { return ArticlePageComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../reducers */ "./src/app/articles/reducers/index.ts");
+/* harmony import */ var _actions_article__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../actions/article */ "./src/app/articles/actions/article.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var ArticlePageComponent = /** @class */ (function () {
+    function ArticlePageComponent(store, activatedRoute) {
+        this.store = store;
+        this.activatedRoute = activatedRoute;
+        this.article = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["select"])(_reducers__WEBPACK_IMPORTED_MODULE_4__["getCurrentArticle"]));
+    }
+    ArticlePageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.routeSub = this.activatedRoute.params.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (params) {
+            _this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_5__["SetCurrentArticleId"](params.id));
+            _this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_5__["Load"](params.id));
+        })).subscribe(function (_) { return null; });
+    };
+    ArticlePageComponent.prototype.ngOnDestroy = function () {
+        this.routeSub.unsubscribe();
+    };
+    ArticlePageComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'article-page',
+            template: __webpack_require__(/*! ./article-page.component.html */ "./src/app/articles/containers/article-page/article-page.component.html"),
+            styles: [__webpack_require__(/*! ./article-page.component.scss */ "./src/app/articles/containers/article-page/article-page.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]])
+    ], ArticlePageComponent);
+    return ArticlePageComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/articles/containers/articles-home-page/articles-home-page.component.html":
 /*!******************************************************************************************!*\
   !*** ./src/app/articles/containers/articles-home-page/articles-home-page.component.html ***!
@@ -2954,7 +3138,7 @@ var ArticlesLoadButtonComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<articles-home-sub-menu (gridClicked)=\"loadGridView()\" (listClicked)=\"loadListView()\"\n(sortByNewest)=\"sortByNewest()\" (sortByOldest)=\"sortByOldest()\" (sortByPopular)=\"sortByPopular()\" [sortedBy]=\"sort\"></articles-home-sub-menu>\n<articles-listing [articles]=\"articles | async\" [isGridView]=\"isGridView | async\" [isListView]=\"isListView | async\"></articles-listing>"
+module.exports = "<articles-home-sub-menu (gridClicked)=\"loadGridView()\" (listClicked)=\"loadListView()\"\n(sortByNewest)=\"sortByNewest()\" (sortByOldest)=\"sortByOldest()\" (sortByPopular)=\"sortByPopular()\" [sortedBy]=\"sortBy | async\"></articles-home-sub-menu>\n<articles-listing [articles]=\"articles | async\" [limit]=\"limit | async\" [isGridView]=\"isGridView | async\" [isListView]=\"isListView | async\"></articles-listing>\n<articles-load-button *ngIf=\"(limit | async) < (articles | async).length\" (click)=\"increaseArticleLimit()\"></articles-load-button>"
 
 /***/ }),
 
@@ -3002,14 +3186,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var ArticlesHomePageComponent = /** @class */ (function () {
     function ArticlesHomePageComponent(store) {
-        var _this = this;
         this.store = store;
         this.loading = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getLoading"]));
         this.isListView = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getIsListView"]));
         this.isGridView = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getIsGridView"]));
         this.error = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getError"]));
-        this.sortSubscription = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getSort"])).subscribe(function (sort) { _this.sort = sort; });
+        this.sortBy = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getSort"]));
         this.articles = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getSortedArticles"]));
+        this.limit = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getLimit"]));
     }
     ArticlesHomePageComponent.prototype.ngOnInit = function () {
         this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["LoadAll"]());
@@ -3029,8 +3213,8 @@ var ArticlesHomePageComponent = /** @class */ (function () {
     ArticlesHomePageComponent.prototype.sortByPopular = function () {
         this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["SortBy"](_models_article__WEBPACK_IMPORTED_MODULE_4__["ARTICLE_SORTS"].POPULAR));
     };
-    ArticlesHomePageComponent.prototype.ngOnDestroy = function () {
-        this.sortSubscription.unsubscribe();
+    ArticlesHomePageComponent.prototype.increaseArticleLimit = function () {
+        this.store.dispatch(new _actions_article__WEBPACK_IMPORTED_MODULE_3__["IncreaseLimit"](9));
     };
     ArticlesHomePageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -3183,7 +3367,8 @@ var initialState = adapter.getInitialState({
     currentArticleId: null,
     error: null,
     loading: false,
-    sortBy: _models_article__WEBPACK_IMPORTED_MODULE_1__["ARTICLE_SORTS"].LATEST
+    sortBy: _models_article__WEBPACK_IMPORTED_MODULE_1__["ARTICLE_SORTS"].LATEST,
+    limit: 9
 });
 function reducer(state, action) {
     if (state === void 0) { state = initialState; }
@@ -3192,7 +3377,7 @@ function reducer(state, action) {
             return __assign({}, state, { loading: true });
         }
         case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadSuccess: {
-            return adapter.addOne(action.payload, __assign({}, state, { currentArticleId: action.payload._id, loading: false }));
+            return adapter.addOne(action.payload, __assign({}, state, { error: null, loading: false }));
         }
         case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadError: {
             return __assign({}, state, { error: action.payload, loading: false });
@@ -3201,13 +3386,19 @@ function reducer(state, action) {
             return __assign({}, state, { loading: true });
         }
         case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadAllSuccess: {
-            return adapter.addMany(action.payload, __assign({}, state, { loading: false }));
+            return adapter.addMany(action.payload, __assign({}, state, { error: null, loading: false }));
         }
         case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].LoadAllError: {
             return __assign({}, state, { error: action.payload, loading: false });
         }
         case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].SortBy: {
             return __assign({}, state, { sortBy: action.payload });
+        }
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].IncreaseLimit: {
+            return __assign({}, state, { limit: state.limit + action.payload });
+        }
+        case _actions_article__WEBPACK_IMPORTED_MODULE_2__["ArticleActionTypes"].SetCurrentArticleId: {
+            return __assign({}, state, { currentArticleId: action.payload });
         }
         default: return state;
     }
@@ -3220,7 +3411,7 @@ function reducer(state, action) {
 /*!********************************************!*\
   !*** ./src/app/articles/reducers/index.ts ***!
   \********************************************/
-/*! exports provided: reducers, articlesFeatureSelector, getArticleEntitiesState, getCurrentArticleId, getError, getLoading, getSort, getArticlesIds, getArticleEntities, getAllArticles, getTotalArticles, getSortedArticles, getLayoutState, getIsGridView, getIsListView */
+/*! exports provided: reducers, articlesFeatureSelector, getArticleEntitiesState, getCurrentArticleId, getError, getLoading, getSort, getLimit, getArticlesIds, getArticleEntities, getAllArticles, getTotalArticles, getSortedArticles, getCurrentArticle, getLayoutState, getIsGridView, getIsListView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3232,11 +3423,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return getError; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLoading", function() { return getLoading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSort", function() { return getSort; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLimit", function() { return getLimit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getArticlesIds", function() { return getArticlesIds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getArticleEntities", function() { return getArticleEntities; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllArticles", function() { return getAllArticles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTotalArticles", function() { return getTotalArticles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSortedArticles", function() { return getSortedArticles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentArticle", function() { return getCurrentArticle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLayoutState", function() { return getLayoutState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIsGridView", function() { return getIsGridView; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIsListView", function() { return getIsListView; });
@@ -3259,6 +3452,7 @@ var getCurrentArticleId = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["creat
 var getError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.error; });
 var getLoading = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.loading; });
 var getSort = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.sortBy; });
+var getLimit = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntitiesState, function (state) { return state.limit; });
 var getArticlesIds = (_a = _article__WEBPACK_IMPORTED_MODULE_1__["adapter"].getSelectors(getArticleEntitiesState), _a.selectIds), getArticleEntities = _a.selectEntities, getAllArticles = _a.selectAll, getTotalArticles = _a.selectTotal;
 var getSortedArticles = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getAllArticles, getSort, function (articles, sort) {
     if (sort == _models_article__WEBPACK_IMPORTED_MODULE_3__["ARTICLE_SORTS"].LATEST)
@@ -3269,6 +3463,7 @@ var getSortedArticles = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createS
         return articles.sort(_models_article__WEBPACK_IMPORTED_MODULE_3__["popularCmp"]);
     return articles;
 });
+var getCurrentArticle = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getArticleEntities, getCurrentArticleId, function (entities, id) { return entities[id]; });
 // layout selectors
 var getLayoutState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(articlesFeatureSelector, function (state) { return state.layout; });
 var getIsGridView = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getLayoutState, function (state) { return state.isGridView; });
@@ -3354,6 +3549,618 @@ var ArticleHttpService = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], ArticleHttpService);
     return ArticleHttpService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/actions/discussion.ts":
+/*!***************************************************!*\
+  !*** ./src/app/discussions/actions/discussion.ts ***!
+  \***************************************************/
+/*! exports provided: DiscussionActionTypes, Load, LoadSuccess, LoadError, SetCurrentDiscussionId */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiscussionActionTypes", function() { return DiscussionActionTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Load", function() { return Load; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSuccess", function() { return LoadSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadError", function() { return LoadError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetCurrentDiscussionId", function() { return SetCurrentDiscussionId; });
+var DiscussionActionTypes;
+(function (DiscussionActionTypes) {
+    DiscussionActionTypes["Load"] = "[Discussion] Load";
+    DiscussionActionTypes["LoadSuccess"] = "[Discussion] Load Success";
+    DiscussionActionTypes["LoadError"] = "[Discussion] Load Error";
+    DiscussionActionTypes["SetCurrentDiscussionId"] = "[Discussion] Set Current Discussion Id";
+})(DiscussionActionTypes || (DiscussionActionTypes = {}));
+var Load = /** @class */ (function () {
+    function Load(payload) {
+        this.payload = payload;
+        this.type = DiscussionActionTypes.Load;
+    }
+    return Load;
+}());
+
+var LoadSuccess = /** @class */ (function () {
+    function LoadSuccess(payload) {
+        this.payload = payload;
+        this.type = DiscussionActionTypes.LoadSuccess;
+    }
+    return LoadSuccess;
+}());
+
+var LoadError = /** @class */ (function () {
+    function LoadError(payload) {
+        this.payload = payload;
+        this.type = DiscussionActionTypes.LoadError;
+    }
+    return LoadError;
+}());
+
+var SetCurrentDiscussionId = /** @class */ (function () {
+    function SetCurrentDiscussionId(payload) {
+        this.payload = payload;
+        this.type = DiscussionActionTypes.SetCurrentDiscussionId;
+    }
+    return SetCurrentDiscussionId;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/actions/layout.ts":
+/*!***********************************************!*\
+  !*** ./src/app/discussions/actions/layout.ts ***!
+  \***********************************************/
+/*! exports provided: LayoutActionTypes, SetShowDiscussion */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LayoutActionTypes", function() { return LayoutActionTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetShowDiscussion", function() { return SetShowDiscussion; });
+var LayoutActionTypes;
+(function (LayoutActionTypes) {
+    LayoutActionTypes["SetShowDiscussion"] = "[Layout] Set Show Discussion";
+})(LayoutActionTypes || (LayoutActionTypes = {}));
+var SetShowDiscussion = /** @class */ (function () {
+    function SetShowDiscussion(payload) {
+        this.payload = payload;
+        this.type = LayoutActionTypes.SetShowDiscussion;
+    }
+    return SetShowDiscussion;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/components/comment/comment.component.html":
+/*!***********************************************************************!*\
+  !*** ./src/app/discussions/components/comment/comment.component.html ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"media mt-5\">\n    <fa-icon [icon]=\"faUser\" size=\"4x\" class=\"mr-2\"></fa-icon>\n    <div class=\"media-body\">\n        <h5 class=\"my-0\">Posted By: {{ comment.user.userId }}</h5>\n        <div>\n            {{ comment.content }}\n            <ul class=\"list-inline font-weight-bold text-secondary small\">\n                <li class=\"list-inline-item\">{{ comment.likedBy.length }}</li>\n                <li class=\"list-inline-item\">\n                    <fa-icon [icon]=\"faChevronUp\"></fa-icon>\n                </li>\n                <li class=\"list-inline-item\">\n                    <em class=\"text-secondary small\">{{ comment.createdAt | date }}</em>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/discussions/components/comment/comment.component.scss":
+/*!***********************************************************************!*\
+  !*** ./src/app/discussions/components/comment/comment.component.scss ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/discussions/components/comment/comment.component.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/discussions/components/comment/comment.component.ts ***!
+  \*********************************************************************/
+/*! exports provided: CommentComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommentComponent", function() { return CommentComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CommentComponent = /** @class */ (function () {
+    function CommentComponent() {
+        this.faChevronUp = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faChevronUp"];
+        this.faUser = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faUser"];
+    }
+    CommentComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CommentComponent.prototype, "comment", void 0);
+    CommentComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'comment',
+            template: __webpack_require__(/*! ./comment.component.html */ "./src/app/discussions/components/comment/comment.component.html"),
+            styles: [__webpack_require__(/*! ./comment.component.scss */ "./src/app/discussions/components/comment/comment.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], CommentComponent);
+    return CommentComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/components/conversation/conversation.component.html":
+/*!*********************************************************************************!*\
+  !*** ./src/app/discussions/components/conversation/conversation.component.html ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"card col-12 my-2\">\n    <comment *ngFor=\"let comment of conversation.comments\" [comment]=\"comment\"></comment>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/discussions/components/conversation/conversation.component.scss":
+/*!*********************************************************************************!*\
+  !*** ./src/app/discussions/components/conversation/conversation.component.scss ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/discussions/components/conversation/conversation.component.ts":
+/*!*******************************************************************************!*\
+  !*** ./src/app/discussions/components/conversation/conversation.component.ts ***!
+  \*******************************************************************************/
+/*! exports provided: ConversationComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConversationComponent", function() { return ConversationComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ConversationComponent = /** @class */ (function () {
+    function ConversationComponent() {
+    }
+    ConversationComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ConversationComponent.prototype, "conversation", void 0);
+    ConversationComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'conversation',
+            template: __webpack_require__(/*! ./conversation.component.html */ "./src/app/discussions/components/conversation/conversation.component.html"),
+            styles: [__webpack_require__(/*! ./conversation.component.scss */ "./src/app/discussions/components/conversation/conversation.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ConversationComponent);
+    return ConversationComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/containers/discussion-container/discussion-container.component.html":
+/*!*************************************************************************************************!*\
+  !*** ./src/app/discussions/containers/discussion-container/discussion-container.component.html ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n    <conversation *ngFor=\"let conversation of (discussion | async)?.conversations\" [conversation]=\"conversation\"></conversation>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/discussions/containers/discussion-container/discussion-container.component.scss":
+/*!*************************************************************************************************!*\
+  !*** ./src/app/discussions/containers/discussion-container/discussion-container.component.scss ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/discussions/containers/discussion-container/discussion-container.component.ts":
+/*!***********************************************************************************************!*\
+  !*** ./src/app/discussions/containers/discussion-container/discussion-container.component.ts ***!
+  \***********************************************************************************************/
+/*! exports provided: DiscussionContainerComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiscussionContainerComponent", function() { return DiscussionContainerComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _reducers___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../reducers/ */ "./src/app/discussions/reducers/index.ts");
+/* harmony import */ var _actions_discussion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/discussion */ "./src/app/discussions/actions/discussion.ts");
+/* harmony import */ var _discussions_actions_layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../discussions/actions/layout */ "./src/app/discussions/actions/layout.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var DiscussionContainerComponent = /** @class */ (function () {
+    function DiscussionContainerComponent(store) {
+        this.store = store;
+        this.discussion = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getCurrentDiscussion"]));
+        this.showDiscussion = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_reducers___WEBPACK_IMPORTED_MODULE_2__["getShowDiscussion"]));
+    }
+    DiscussionContainerComponent.prototype.ngOnInit = function () {
+        this.store.dispatch(new _actions_discussion__WEBPACK_IMPORTED_MODULE_3__["SetCurrentDiscussionId"](this.discussionId));
+        this.store.dispatch(new _actions_discussion__WEBPACK_IMPORTED_MODULE_3__["Load"](this.discussionId));
+    };
+    DiscussionContainerComponent.prototype.loadDiscussion = function () {
+        this.store.dispatch(new _actions_discussion__WEBPACK_IMPORTED_MODULE_3__["SetCurrentDiscussionId"](this.discussionId));
+        this.store.dispatch(new _actions_discussion__WEBPACK_IMPORTED_MODULE_3__["Load"](this.discussionId));
+        this.store.dispatch(new _discussions_actions_layout__WEBPACK_IMPORTED_MODULE_4__["SetShowDiscussion"](true));
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", String)
+    ], DiscussionContainerComponent.prototype, "discussionId", void 0);
+    DiscussionContainerComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'discussion-container',
+            template: __webpack_require__(/*! ./discussion-container.component.html */ "./src/app/discussions/containers/discussion-container/discussion-container.component.html"),
+            styles: [__webpack_require__(/*! ./discussion-container.component.scss */ "./src/app/discussions/containers/discussion-container/discussion-container.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["Store"]])
+    ], DiscussionContainerComponent);
+    return DiscussionContainerComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/discussions.module.ts":
+/*!***************************************************!*\
+  !*** ./src/app/discussions/discussions.module.ts ***!
+  \***************************************************/
+/*! exports provided: DiscussionsModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiscussionsModule", function() { return DiscussionsModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm5/angular-fontawesome.js");
+/* harmony import */ var _effects_discussion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./effects/discussion */ "./src/app/discussions/effects/discussion.ts");
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reducers */ "./src/app/discussions/reducers/index.ts");
+/* harmony import */ var _services_discussion_http_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/discussion-http.service */ "./src/app/discussions/services/discussion-http.service.ts");
+/* harmony import */ var _components_conversation_conversation_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/conversation/conversation.component */ "./src/app/discussions/components/conversation/conversation.component.ts");
+/* harmony import */ var _components_comment_comment_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/comment/comment.component */ "./src/app/discussions/components/comment/comment.component.ts");
+/* harmony import */ var _containers_discussion_container_discussion_container_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./containers/discussion-container/discussion-container.component */ "./src/app/discussions/containers/discussion-container/discussion-container.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+var DiscussionsModule = /** @class */ (function () {
+    function DiscussionsModule() {
+    }
+    DiscussionsModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
+                _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeModule"],
+                _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["StoreModule"].forFeature("discussions", _reducers__WEBPACK_IMPORTED_MODULE_7__["reducers"]),
+                _ngrx_effects__WEBPACK_IMPORTED_MODULE_4__["EffectsModule"].forFeature([_effects_discussion__WEBPACK_IMPORTED_MODULE_6__["DiscussionEffects"]])
+            ],
+            exports: [
+                _containers_discussion_container_discussion_container_component__WEBPACK_IMPORTED_MODULE_11__["DiscussionContainerComponent"],
+                _components_conversation_conversation_component__WEBPACK_IMPORTED_MODULE_9__["ConversationComponent"],
+                _components_comment_comment_component__WEBPACK_IMPORTED_MODULE_10__["CommentComponent"]
+            ],
+            providers: [_services_discussion_http_service__WEBPACK_IMPORTED_MODULE_8__["DiscussionHttpService"]],
+            declarations: [_components_conversation_conversation_component__WEBPACK_IMPORTED_MODULE_9__["ConversationComponent"], _components_comment_comment_component__WEBPACK_IMPORTED_MODULE_10__["CommentComponent"], _containers_discussion_container_discussion_container_component__WEBPACK_IMPORTED_MODULE_11__["DiscussionContainerComponent"]]
+        })
+    ], DiscussionsModule);
+    return DiscussionsModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/effects/discussion.ts":
+/*!***************************************************!*\
+  !*** ./src/app/discussions/effects/discussion.ts ***!
+  \***************************************************/
+/*! exports provided: DiscussionEffects */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiscussionEffects", function() { return DiscussionEffects; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
+/* harmony import */ var _actions_discussion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/discussion */ "./src/app/discussions/actions/discussion.ts");
+/* harmony import */ var _services_discussion_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/discussion-http.service */ "./src/app/discussions/services/discussion-http.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var DiscussionEffects = /** @class */ (function () {
+    function DiscussionEffects(actions$, discussionService) {
+        var _this = this;
+        this.actions$ = actions$;
+        this.discussionService = discussionService;
+        this.load$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_actions_discussion__WEBPACK_IMPORTED_MODULE_3__["DiscussionActionTypes"].Load), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (action) { return action.payload; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["switchMap"])(function (id) { return _this.discussionService.getDiscussion(id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (discussion) { return new _actions_discussion__WEBPACK_IMPORTED_MODULE_3__["LoadSuccess"](discussion); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(new _actions_discussion__WEBPACK_IMPORTED_MODULE_3__["LoadError"](err)); })); }));
+    }
+    __decorate([
+        Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Effect"])(),
+        __metadata("design:type", rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"])
+    ], DiscussionEffects.prototype, "load$", void 0);
+    DiscussionEffects = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["Actions"], _services_discussion_http_service__WEBPACK_IMPORTED_MODULE_4__["DiscussionHttpService"]])
+    ], DiscussionEffects);
+    return DiscussionEffects;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/reducers/discussion.ts":
+/*!****************************************************!*\
+  !*** ./src/app/discussions/reducers/discussion.ts ***!
+  \****************************************************/
+/*! exports provided: adapter, initialState, reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "adapter", function() { return adapter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var _ngrx_entity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/entity */ "./node_modules/@ngrx/entity/fesm5/entity.js");
+/* harmony import */ var _actions_discussion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../actions/discussion */ "./src/app/discussions/actions/discussion.ts");
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+
+var adapter = Object(_ngrx_entity__WEBPACK_IMPORTED_MODULE_0__["createEntityAdapter"])({
+    selectId: function (discussion) { return discussion._id; },
+    sortComparer: false
+});
+var initialState = adapter.getInitialState({
+    error: null,
+    loading: false,
+    currentDiscussionId: null
+});
+function reducer(state, action) {
+    if (state === void 0) { state = initialState; }
+    switch (action.type) {
+        case _actions_discussion__WEBPACK_IMPORTED_MODULE_1__["DiscussionActionTypes"].Load: {
+            return __assign({}, state, { loading: true });
+        }
+        case _actions_discussion__WEBPACK_IMPORTED_MODULE_1__["DiscussionActionTypes"].LoadSuccess: {
+            return adapter.addOne(action.payload, __assign({}, state, { error: null, loading: false }));
+        }
+        case _actions_discussion__WEBPACK_IMPORTED_MODULE_1__["DiscussionActionTypes"].LoadError: {
+            return __assign({}, state, { error: action.payload, loading: false });
+        }
+        case _actions_discussion__WEBPACK_IMPORTED_MODULE_1__["DiscussionActionTypes"].SetCurrentDiscussionId: {
+            return __assign({}, state, { currentDiscussionId: action.payload });
+        }
+        default: return state;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/reducers/index.ts":
+/*!***********************************************!*\
+  !*** ./src/app/discussions/reducers/index.ts ***!
+  \***********************************************/
+/*! exports provided: reducers, discussionFeatureSelector, getDiscussionEntitiesState, getError, getLoading, getCurrentDiscussionId, getDiscussionIds, getDiscussionEntities, getAllDiscussions, getTotalDiscussions, getCurrentDiscussion, getLayoutState, getShowDiscussion */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducers", function() { return reducers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "discussionFeatureSelector", function() { return discussionFeatureSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDiscussionEntitiesState", function() { return getDiscussionEntitiesState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return getError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLoading", function() { return getLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentDiscussionId", function() { return getCurrentDiscussionId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDiscussionIds", function() { return getDiscussionIds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDiscussionEntities", function() { return getDiscussionEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllDiscussions", function() { return getAllDiscussions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTotalDiscussions", function() { return getTotalDiscussions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentDiscussion", function() { return getCurrentDiscussion; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLayoutState", function() { return getLayoutState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getShowDiscussion", function() { return getShowDiscussion; });
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _discussion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./discussion */ "./src/app/discussions/reducers/discussion.ts");
+/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layout */ "./src/app/discussions/reducers/layout.ts");
+
+
+
+var reducers = {
+    discussions: _discussion__WEBPACK_IMPORTED_MODULE_1__["reducer"],
+    layout: _layout__WEBPACK_IMPORTED_MODULE_2__["reducer"]
+};
+var discussionFeatureSelector = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])("discussions");
+// discussion selectors
+var getDiscussionEntitiesState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(discussionFeatureSelector, function (state) { return state.discussions; });
+var getError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getDiscussionEntitiesState, function (state) { return state.error; });
+var getLoading = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getDiscussionEntitiesState, function (state) { return state.loading; });
+var getCurrentDiscussionId = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getDiscussionEntitiesState, function (state) { return state.currentDiscussionId; });
+var getDiscussionIds = (_a = _discussion__WEBPACK_IMPORTED_MODULE_1__["adapter"].getSelectors(getDiscussionEntitiesState), _a.selectIds), getDiscussionEntities = _a.selectEntities, getAllDiscussions = _a.selectAll, getTotalDiscussions = _a.selectTotal;
+var getCurrentDiscussion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getDiscussionEntities, getCurrentDiscussionId, function (entities, id) {
+    console.log(entities, id);
+    return entities[id];
+});
+// layout selectors
+var getLayoutState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(discussionFeatureSelector, function (state) { return state.layout; });
+var getShowDiscussion = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getLayoutState, function (state) { return state.showDiscussion; });
+var _a;
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/reducers/layout.ts":
+/*!************************************************!*\
+  !*** ./src/app/discussions/reducers/layout.ts ***!
+  \************************************************/
+/*! exports provided: reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var _actions_layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../actions/layout */ "./src/app/discussions/actions/layout.ts");
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+var initialState = {
+    showDiscussion: false
+};
+function reducer(state, action) {
+    if (state === void 0) { state = initialState; }
+    switch (action.type) {
+        case _actions_layout__WEBPACK_IMPORTED_MODULE_0__["LayoutActionTypes"].SetShowDiscussion: {
+            return __assign({}, state, { showDiscussion: action.payload });
+        }
+        default: return state;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/app/discussions/services/discussion-http.service.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/discussions/services/discussion-http.service.ts ***!
+  \*****************************************************************/
+/*! exports provided: DiscussionHttpService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiscussionHttpService", function() { return DiscussionHttpService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DiscussionHttpService = /** @class */ (function () {
+    function DiscussionHttpService(http) {
+        this.http = http;
+    }
+    DiscussionHttpService.prototype.getDiscussion = function (id) {
+        return this.http.get("/api/discussions/" + id);
+    };
+    DiscussionHttpService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], DiscussionHttpService);
+    return DiscussionHttpService;
 }());
 
 

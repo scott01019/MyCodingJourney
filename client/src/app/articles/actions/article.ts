@@ -8,7 +8,9 @@ export enum ArticleActionTypes {
     LoadAll = "[Article] Load Many",
     LoadAllSuccess = "[Article] Load Many Success",
     LoadAllError = "[Article] Load Many Error",
-    SortBy = "[Article] Sort By"
+    SortBy = "[Article] Sort By",
+    IncreaseLimit = "[Article] Increase Limit",
+    SetCurrentArticleId = "[Article] Set Current Article Id",
 }
 
 export class Load implements Action {
@@ -45,5 +47,23 @@ export class SortBy implements Action {
     constructor(public payload: ARTICLE_SORTS) {}
 }
 
+export class IncreaseLimit implements Action {
+    readonly type = ArticleActionTypes.IncreaseLimit
+    constructor(public payload: number) {}
+}
 
-export type ArticleActions = Load | LoadSuccess | LoadError | LoadAll | LoadAllError | LoadAllSuccess | SortBy
+export class SetCurrentArticleId implements Action {
+    readonly type = ArticleActionTypes.SetCurrentArticleId
+    constructor(public payload: string) {}
+}
+
+export type ArticleActions = 
+Load 
+| LoadSuccess 
+| LoadError 
+| LoadAll 
+| LoadAllError 
+| LoadAllSuccess 
+| SortBy 
+| IncreaseLimit 
+| SetCurrentArticleId

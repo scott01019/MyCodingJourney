@@ -1,0 +1,4 @@
+<article [article]="article | async"></article>
+<ng-container *ngIf="(article | async)">
+    <discussion-container [discussionId]="(article | async).discussion"></discussion-container>
+</ng-container>

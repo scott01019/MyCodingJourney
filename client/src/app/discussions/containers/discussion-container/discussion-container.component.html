@@ -1,0 +1,3 @@
+<div class="container">
+    <conversation *ngFor="let conversation of (discussion | async)?.conversations" [conversation]="conversation"></conversation>
+</div>

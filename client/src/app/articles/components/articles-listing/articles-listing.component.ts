@@ -9,6 +9,7 @@ import { Article } from '../../models/article';
 export class ArticlesListingComponent implements OnInit {
 
     @Input() articles: Article[]
+    @Input() limit: number
     @Input() isGridView: boolean = true
     @Input() isListView: boolean = false
     

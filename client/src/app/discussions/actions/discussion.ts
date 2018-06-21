@@ -4,7 +4,8 @@ import { Discussion } from "./../models/discussion"
 export enum DiscussionActionTypes {
     Load = "[Discussion] Load",
     LoadSuccess = "[Discussion] Load Success",
-    LoadError = "[Discussion] Load Error"
+    LoadError = "[Discussion] Load Error",
+    SetCurrentDiscussionId = "[Discussion] Set Current Discussion Id"
 }
 
 export class Load implements Action {
@@ -22,4 +23,9 @@ export class LoadError implements Action {
     constructor(public payload: string) {}
 }
 
-export type DiscussionActions = Load | LoadSuccess | LoadError
+export class SetCurrentDiscussionId implements Action {
+    readonly type = DiscussionActionTypes.SetCurrentDiscussionId
+    constructor(public payload: string) {}
+}
+
+export type DiscussionActions = Load | LoadSuccess | LoadError | SetCurrentDiscussionId

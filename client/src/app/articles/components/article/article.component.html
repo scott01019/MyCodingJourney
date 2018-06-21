@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img class="img-fluid" src="{{ article?.imgSrc }}">
+            <h2>{{ article?.title }}</h2>
+            <h3>{{ article?.subTitle }}</h3>
+            <ng-container *ngFor="let content of article?.contents">
+                <ng-container [ngSwitch]="content.component">
+                    <h4 *ngSwitchCase="'Header'" class="font-weight-bold">{{ content.content }}</h4>
+                    <p *ngSwitchCase="'Paragraph'">{{ content.content }}</p>
+                    <img *ngSwitchCase="'Image'" class="img-fluid mx-auto" src="{{ content.content }}">
+                    <p *ngSwitchCase="'CodeBlock'" class="bg-light mx-auto p-3">{{ content.content }}</p>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>

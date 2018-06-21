@@ -7,6 +7,7 @@ export interface State extends EntityState<Article> {
     error: string | null
     loading: boolean
     sortBy: ARTICLE_SORTS
+    limit: number
 }
 
 export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
@@ -18,7 +19,8 @@ export const initialState: State = adapter.getInitialState({
     currentArticleId: null,
     error: null,
     loading: false,
-    sortBy: ARTICLE_SORTS.LATEST
+    sortBy: ARTICLE_SORTS.LATEST,
+    limit: 9
 })
 
 export function reducer(state = initialState, action: ArticleActions): State {
@@ -33,7 +35,7 @@ export function reducer(state = initialState, action: ArticleActions): State {
         case ArticleActionTypes.LoadSuccess: {
             return adapter.addOne(action.payload, {
                 ...state,
-                currentArticleId: action.payload._id,
+                error: null,
                 loading: false
             })
         }
@@ -56,6 +58,7 @@ export function reducer(state = initialState, action: ArticleActions): State {
         case ArticleActionTypes.LoadAllSuccess: {
             return adapter.addMany(action.payload, {
                 ...state,
+                error: null,
                 loading: false
             })
         }
@@ -72,6 +75,20 @@ export function reducer(state = initialState, action: ArticleActions): State {
             return {
                 ...state,
                 sortBy: action.payload
+            }
+        }
+
+        case ArticleActionTypes.IncreaseLimit: {
+            return {
+                ...state,
+                limit: state.limit + action.payload
+            }
+        }
+
+        case ArticleActionTypes.SetCurrentArticleId: {
+            return {
+                ...state,
+                currentArticleId: action.payload
             }
         }
 
